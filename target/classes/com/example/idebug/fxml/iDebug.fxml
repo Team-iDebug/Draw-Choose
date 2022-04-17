@@ -130,7 +130,7 @@
             <Insets bottom="1.0" left="1.0" top="1.0" />
          </BorderPane.margin>
          <children>
-            <ScrollPane fitToWidth="true" stylesheets="@../css/iDebug.css" VBox.vgrow="ALWAYS">
+            <ScrollPane fx:id="scrollPane" fitToWidth="true" hbarPolicy="NEVER" stylesheets="@../css/iDebug.css" VBox.vgrow="ALWAYS">
                <content>
                   <VBox fx:id="msgContainer" alignment="BOTTOM_LEFT" maxWidth="230.0" minHeight="545.0" prefWidth="230.0" spacing="10.0" stylesheets="@../css/iDebug.css">
                      <children>

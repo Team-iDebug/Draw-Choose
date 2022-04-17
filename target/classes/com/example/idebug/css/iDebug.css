@@ -139,14 +139,6 @@
     -fx-font-weight: 100;
 }
 
-.message-info-status {
-    -fx-alignment: center-left;
-}
-
-.message-info-time {
-    -fx-alignment: center-right;
-}
-
 .message-box {
     -fx-background-color: -fx-green;
     -fx-border-radius: 10 10 10 10;

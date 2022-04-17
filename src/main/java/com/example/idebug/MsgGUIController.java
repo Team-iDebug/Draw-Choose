@@ -1,5 +1,6 @@
 package com.example.idebug;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -21,10 +22,7 @@ public class MsgGUIController {
         return msgGUIController;
     }
 
-    public void send(VBox msgContainer, Message message) {
-        HBox parentBox = new HBox();
-        parentBox.getStyleClass().add("message-box-received-container");
-
+    private VBox getGuiMessageBox(Message message) {
         VBox msgBox = new VBox();
         msgBox.getStyleClass().add("message-box-test");
 
@@ -45,13 +43,13 @@ public class MsgGUIController {
         Label time = new Label(message.getTime().getMinute() + ":" + message.getTime().getSecond());
         Label status = new Label(message.getStatus().toString());
         time.getStyleClass().add("message-info");
-        time.getStyleClass().add("message-info-time");
-        HBox.setHgrow(time, Priority.ALWAYS);
+        HBox.setHgrow(timeBox, Priority.ALWAYS);
         status.getStyleClass().add("message-info");
-        status.getStyleClass().add("message-info-status");
-        HBox.setHgrow(status,Priority.ALWAYS);
+        HBox.setHgrow(statusBox,Priority.ALWAYS);
         timeBox.getChildren().add(time);
         statusBox.getChildren().add(status);
+        statusBox.setAlignment(Pos.BOTTOM_LEFT);
+        timeBox.setAlignment(Pos.BOTTOM_RIGHT);
         infoBox.getChildren().add(statusBox);
         infoBox.getChildren().add(timeBox);
 
@@ -59,8 +57,26 @@ public class MsgGUIController {
         msgBox.getChildren().add(textBox);
         msgBox.getChildren().add(infoBox);
 
-        parentBox.getChildren().add(msgBox);
+        return msgBox;
+    }
 
+    public void send(VBox msgContainer, Message message) {
+        HBox parentBox = new HBox();
+        parentBox.getStyleClass().add("message-box-sent-container");
+
+        VBox msgBox = getGuiMessageBox(message);
+
+        parentBox.getChildren().add(msgBox);
+        msgContainer.getChildren().add(parentBox);
+    }
+
+    public void receive(VBox msgContainer, Message message) {
+        HBox parentBox = new HBox();
+        parentBox.getStyleClass().add("message-box-received-container");
+
+        VBox msgBox = getGuiMessageBox(message);
+
+        parentBox.getChildren().add(msgBox);
         msgContainer.getChildren().add(parentBox);
     }
 }
