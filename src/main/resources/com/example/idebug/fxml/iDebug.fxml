@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="root" stylesheets="@../css/iDebug.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="root" stylesheets="@../css/iDebug.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.idebug.FXMessageController">
    <top>
       <HBox prefHeight="50.0" prefWidth="200.0" styleClass="title-bar" stylesheets="@../css/iDebug.css" BorderPane.alignment="CENTER">
          <children>
@@ -124,56 +125,64 @@
       </VBox>
    </left>
    <right>
-      <VBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="240.0" spacing="10.0" styleClass="message" stylesheets="@../css/iDebug.css" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="240.0" spacing="10.0" styleClass="message" stylesheets="@../css/iDebug.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="1.0" left="1.0" top="1.0" />
          </BorderPane.margin>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </padding>
          <children>
-            <VBox alignment="BOTTOM_LEFT" prefHeight="550.0" prefWidth="220.0" spacing="10.0">
-               <children>
-                  <HBox styleClass="message-box-received-container" stylesheets="@../css/iDebug.css" VBox.vgrow="NEVER">
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
+            <ScrollPane fitToWidth="true" stylesheets="@../css/iDebug.css" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox fx:id="msgContainer" alignment="BOTTOM_LEFT" maxWidth="230.0" minHeight="545.0" prefWidth="230.0" spacing="10.0" stylesheets="@../css/iDebug.css">
                      <children>
-                        <Label styleClass="message-box-received" stylesheets="@../css/iDebug.css" text="Hello Guys!!! How are you doing?" wrapText="true">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
+                        <HBox styleClass="message-box-sent-container" stylesheets="@../css/iDebug.css">
+                           <children>
+                              <VBox minWidth="100.0" styleClass="message-box-test" stylesheets="@../css/iDebug.css">
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <Label styleClass="message-sender" stylesheets="@../css/iDebug.css" text="Label" />
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label styleClass="message-text" stylesheets="@../css/iDebug.css" text="ok" wrapText="true" />
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <HBox alignment="BOTTOM_LEFT" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="message-info" stylesheets="@../css/iDebug.css" text="Sent" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                             <children>
+                                                <Label styleClass="message-info" stylesheets="@../css/iDebug.css" text="12:40 PM" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <HBox alignment="TOP_RIGHT" styleClass="message-box-sent-container" stylesheets="@../css/iDebug.css">
-                     <children>
-                        <Label styleClass="message-box-received" stylesheets="@../css/iDebug.css" text="I am goint home, i am going home, everybody see" wrapText="true">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <padding>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-            </VBox>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding></VBox>
+               </content>
+            </ScrollPane>
             <HBox prefHeight="30.0" prefWidth="240.0" spacing="5.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
                <children>
-                  <TextField prefHeight="30.0" prefWidth="189.0" styleClass="message-input-box" stylesheets="@../css/iDebug.css">
+                  <TextField fx:id="msgTextField" prefHeight="30.0" prefWidth="189.0" styleClass="message-input-box" stylesheets="@../css/iDebug.css">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
                   </TextField>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="30.0" styleClass="small-circle-button" stylesheets="@../css/iDebug.css">
+                  <HBox fx:id="msgSendButton" alignment="CENTER" onMouseClicked="#onMsgSendButton" prefHeight="100.0" prefWidth="30.0" styleClass="small-circle-button" stylesheets="@../css/iDebug.css">
                      <children>
                         <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -183,8 +192,14 @@
                      </children>
                   </HBox>
                </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" />
+               </padding>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
       </VBox>
    </right>
    <center>

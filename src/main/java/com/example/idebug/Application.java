@@ -1,16 +1,15 @@
 package com.example.idebug;
 
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class Application extends javafx.application.Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("fxml/iDebug.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("fxml/iDebug.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         String css = getClass().getResource("css/iDebug.css").toExternalForm();
         scene.getStylesheets().add(css);

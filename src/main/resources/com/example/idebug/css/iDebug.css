@@ -99,19 +99,55 @@
    -fx-background-position: center center;
 }
 
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
 .message-box-sent-container {
     -fx-padding: 0 0 0 35;
     -fx-border-insets: 0 0 0 35;
     -fx-background-insets: 0 0 0 35;
+    -fx-alignment: center-right;
 }
 
 .message-box-received-container {
     -fx-padding: 0 35 0 0;
     -fx-border-insets: 0 35 0 0;
     -fx-background-insets: 0 35 0 0;
+    -fx-alignment: center-left;
 }
 
-.message-box-received {
+.message-sender {
+    -fx-font-size: 12px;
+    -fx-text-fill: #00FF66;
+    -fx-font-weight: 700;
+}
+
+.message-text {
+    -fx-font-size: 12px;
+    -fx-text-fill: -fx-white;
+    -fx-font-weight: 700;
+}
+
+.message-info {
+    -fx-font-size: 10px;
+    -fx-text-fill: -fx-grey;
+    -fx-font-weight: 100;
+}
+
+.message-info-status {
+    -fx-alignment: center-left;
+}
+
+.message-info-time {
+    -fx-alignment: center-right;
+}
+
+.message-box {
     -fx-background-color: -fx-green;
     -fx-border-radius: 10 10 10 10;
     -fx-background-radius: 10 10 10 10;
@@ -120,19 +156,20 @@
     -fx-text-fill: -fx-white;
     -fx-font-weight: 500;
     -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 0.0, 0.0, 2.0, 1.0);
-    -fx-alignment: top-left;
+    -fx-alignment: center;
 }
 
-.message-box-sent {
+.message-box-test {
+    -fx-min-width: 100;
     -fx-background-color: -fx-green;
-    -fx-border-radius: 10 10 10 10;
-    -fx-background-radius: 10 10 10 10;
-    -fx-padding: 10 10 10 10;
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-padding: 5 5 5 5;
     -fx-font-size: 12px;
     -fx-text-fill: -fx-white;
     -fx-font-weight: 500;
     -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 0.0, 0.0, 2.0, 1.0);
-    -fx-alignment: top-right;
+    -fx-alignment: center;
 }
 
 .message-input-box {
