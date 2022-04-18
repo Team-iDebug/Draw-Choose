@@ -1,18 +1,23 @@
 * {
     -fx-grey: #D0D0D0;
     -fx-light-grey: #F1F1F1;
-    -fx-green: #075E54;
-    -fx-light-green: #207D73;
+    -fx-green: #07BB4F;
+    -fx-dark-green: #075E54;
+    -fx-light-green: #87FFB7;
     -fx-white: #FFFFFF;
     -fx-red: #FA3E3E;
+    -fx-light-yellow: #FFC803;
+    -fx-dark-yellow: #C88700;
+    -fx-yellow: #F7B733;
+    -fx-background: #E5F0E5;
 }
 
 .root {
-    -fx-background-color: -fx-grey;
+    -fx-background-color: -fx-background;
 }
 
 .title-bar {
-    -fx-background-color: -fx-light-grey;
+    -fx-background-color: -fx-white;
 }
 
 .title {
@@ -22,7 +27,7 @@
 }
 
 .rank {
-    -fx-background-color: -fx-light-grey;
+    -fx-background-color: transparent;
 }
 
 .player {
@@ -30,38 +35,78 @@
     -fx-border-color: -fx-green;
     -fx-border-width: 3;
     -fx-border-style: hidden hidden hidden solid;
-    -fx-padding: 10;
+    -fx-padding: 2;
     -fx-font-size: 12px;
     -fx-font-weight: 700;
     -fx-text-fill: -fx-grey;
+    -fx-border-radius: 2 2 2 2;
+    -fx-background-radius: 2 2 2 2;
+}
+
+.player-profile {
+    -fx-border-radius: 17 17 17 17;
+    -fx-background-radius: 17 17 17 17;
+    -fx-background-color: -fx-background;
+}
+
+.player-name {
+    -fx-text-fill: #B7B7B7;
+    -fx-font-size: 10px;
+}
+
+.points {
+    -fx-background-color: -fx-light-green;
+    -fx-font-size: 8px;
+    -fx-text-fill: -fx-green;
+    -fx-border-radius: 2 2 2 2;
+    -fx-background-radius: 2 2 2 2;
+    -fx-padding: 2;
+}
+
+.player-status {
+    -fx-border-radius: 15 15 15 15;
+    -fx-background-radius: 15 15 15 15;
+    -fx-background-color: -fx-light-yellow;
+    -fx-alignment: center;
 }
 
 .butt-on {
-    -fx-background-color: -fx-green;
-    -fx-text-fill: -fx-white;
+    -fx-background-color: -fx-light-yellow;
+    -fx-text-fill: -fx-dark-yellow;
     -fx-font-size: 12px;
     -fx-font-weight: 700;
-    -fx-effect: dropshadow(gaussian, rgba(32, 125, 115, 1.00), 0.0, 0.0, 0.0, 5.0);
     -fx-border-radius: 10 10 10 10;
-    -fx-background-radius: 10 10 10 10;
+    -fx-background-radius: 12 12 12 12;
+    -fx-border-color: -fx-white;
+    -fx-border-width: 5;
+    -fx-effect: dropshadow(gaussian, rgba(234,218,75, 0.25), 1.0, 4.0, 1.0, 1.0);
 }
 
 .canvas {
     -fx-background-color: -fx-white;
 }
 
+.button-box {
+    -fx-pref-height: 35;
+    -fx-pref-width: 30;
+    -fx-background-color: -fx-light-yellow;
+    -fx-padding: 3 3 0 3;
+    -fx-border-insets: 3 3 0 3;
+    -fx-background-insets: 3 3 0 3;
+    -fx-border-radius: 8 8 8 8;
+    -fx-background-radius: 8 8 8 8;
+}
+
 .button-container {
-    -fx-background-color: -fx-green;
-    -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 0.0, 0.0, 2.0, 1.0);
+    -fx-background-color: -fx-white;
+    -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 1.0, 0.0, 2.0, 1.0);
     -fx-border-radius: 10 10 10 10;
     -fx-background-radius: 10 10 10 10;
 }
 
-.white-button-container {
-    -fx-background-color: -fx-white;
-    -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 0.0, 0.0, 2.0, 1.0);
-    -fx-border-color: #CDCDCD;
-    -fx-border-width: 1;
+.green-button-container {
+    -fx-background-color: -fx-light-green;
+    -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 1.0, 0.0, 2.0, 1.0);
     -fx-border-radius: 10 10 10 10;
     -fx-background-radius: 10 10 10 10;
 }
@@ -93,7 +138,6 @@
 }
 
 .message {
-   -fx-background-image: url('../widgets/chatbg.png');
    -fx-background-size: 500 700;
    -fx-background-repeat: no-repeat;
    -fx-background-position: center center;
@@ -140,7 +184,7 @@
 }
 
 .message-box {
-    -fx-background-color: -fx-green;
+    -fx-background-color: -fx-dark-green;
     -fx-border-radius: 10 10 10 10;
     -fx-background-radius: 10 10 10 10;
     -fx-padding: 10 10 10 10;
@@ -153,7 +197,7 @@
 
 .message-box-test {
     -fx-min-width: 100;
-    -fx-background-color: -fx-green;
+    -fx-background-color: -fx-dark-green;
     -fx-border-radius: 5 5 5 5;
     -fx-background-radius: 5 5 5 5;
     -fx-padding: 5 5 5 5;
@@ -174,7 +218,7 @@
 }
 
 .small-circle-button {
-    -fx-background-color: -fx-green;
+    -fx-background-color: -fx-dark-green;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
     -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 0.0, 0.0, 2.0, 1.0);
@@ -183,12 +227,12 @@
 .large-circle-button {
     -fx-pref-width: 30;
     -fx-alignment: center;
-    -fx-background-color: -fx-green;
+    -fx-background-color: -fx-light-green;
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
     -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 0.0, 0.0, 2.0, 1.0);
 }
 
 .footer {
-    -fx-background-color: -fx-light-grey;
+    -fx-background-color: -fx-white;
 }
