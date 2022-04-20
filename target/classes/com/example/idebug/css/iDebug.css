@@ -3,11 +3,12 @@
     -fx-light-grey: #F1F1F1;
     -fx-green: #07BB4F;
     -fx-dark-green: #075E54;
-    -fx-light-green: #87FFB7;
+    -fx-light-green: #B9FFD5;
     -fx-white: #FFFFFF;
     -fx-red: #FA3E3E;
     -fx-light-yellow: #FFC803;
     -fx-dark-yellow: #C88700;
+    -fx-super-light-yellow: #FFDA56;
     -fx-yellow: #F7B733;
     -fx-background: #E5F0E5;
 }
@@ -66,7 +67,7 @@
 .player-status {
     -fx-border-radius: 15 15 15 15;
     -fx-background-radius: 15 15 15 15;
-    -fx-background-color: -fx-light-yellow;
+    -fx-background-color: -fx-super-light-yellow;
     -fx-alignment: center;
 }
 
