@@ -6,7 +6,8 @@ module com.example.idebug {
     requires org.kordamp.bootstrapfx.core;
 
     requires com.google.gson;
+    opens com.example.idebug to com.google.gson,javafx.fxml;
+    opens com.example.idebug.network to com.google.gson;
 
-    opens com.example.idebug to javafx.fxml;
     exports com.example.idebug;
 }

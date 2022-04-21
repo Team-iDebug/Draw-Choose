@@ -64,7 +64,7 @@
                      <children>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../widgets/green-exit%20.png" />
+                              <Image url="@../widgets/green-exit .png" />
                            </image>
                         </ImageView>
                      </children>

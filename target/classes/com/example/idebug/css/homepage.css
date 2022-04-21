@@ -1,0 +1,71 @@
+* {
+    -fx-white: #FFFFFF;
+    -fx-green: #07BB4F;
+    -fx-yellow: #F9A826;
+    -fx-light-grey: #ADADAD;
+    -fx-black: #000000;
+    -fx-grey: #797979;
+    -fx-light-red: #FFCBCB;
+    -fx-red: #E54343;
+}
+
+.root {
+    -fx-background-color: -fx-white;
+}
+
+.title-txt {
+    -fx-text-fill: -fx-green;
+    -fx-font-size: 35px;
+    -fx-font-weight: bold;
+}
+
+.small-txt {
+    -fx-text-fill: -fx-grey;
+    -fx-font-size: 12px;
+}
+
+.text-field {
+    -fx-min-height: 35;
+    -fx-min-width: 280;
+    -fx-max-height: 35;
+    -fx-max-width: 280;
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-border-color: -fx-black;
+    -fx-border-width: 0.5;
+}
+
+.join-button {
+    -fx-min-width: 280;
+    -fx-max-width: 280;
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-background-color: -fx-green;
+    -fx-text-fill: -fx-white;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+
+.host-button {
+    -fx-min-width: 280;
+    -fx-max-width: 280;
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-background-color: -fx-yellow;
+    -fx-text-fill: -fx-white;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+}
+
+.error-message {
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-background-color: -fx-light-red;
+    -fx-padding: 4 4 4 4;
+}
+
+.error-txt {
+    -fx-font-weight: bold;
+    -fx-font-size: 16;
+    -fx-text-fill: -fx-red;
+}
