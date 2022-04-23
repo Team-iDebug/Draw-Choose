@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<BorderPane prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/game.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iDebug.pickloose.fxcontroller.FXCanvasController">
+    <opaqueInsets>
+        <Insets />
+    </opaqueInsets>
+    <BorderPane.margin>
+        <Insets bottom="1.0" top="1.0" />
+    </BorderPane.margin>
+    <left>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="35.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox spacing="3.0" styleClass="button-container" stylesheets="@../../css/game.css">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="35.0" styleClass="button-box" VBox.vgrow="ALWAYS">
+                            <children>
+                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../widgets/yellow-pencil.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets />
+                                    </HBox.margin>
+                                </ImageView>
+                            </children>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                            <children>
+                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../widgets/yellow-brush.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                            <children>
+                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../widgets/yellow-eraser.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                            <children>
+                                <ImageView fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../widgets/yellow-spray.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                            <children>
+                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../widgets/yellow-fill.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                            <children>
+                                <ImageView fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../widgets/yellow-clear.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="2.0" top="2.0" />
+                    </padding></VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets left="2.0" right="3.0" />
+            </BorderPane.margin>
+        </VBox>
+    </left>
+    <right>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="35.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox prefWidth="100.0" styleClass="button-container" stylesheets="@../../css/game.css">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../widgets/color-wheel.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="2.0" top="2.0" />
+                    </padding></VBox>
+            </children>
+            <BorderPane.margin>
+                <Insets left="4.0" right="4.0" />
+            </BorderPane.margin>
+        </VBox>
+    </right>
+    <center>
+        <VBox styleClass="canvas" stylesheets="@../../css/game.css" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" prefHeight="20.0" prefWidth="200.0">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER" prefWidth="70.0" styleClass="timer" stylesheets="@../../css/game.css">
+                                    <padding>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                    </padding>
+                                    <children>
+                                        <Label styleClass="bold-white-font" stylesheets="@../../css/game.css" text="0:12" textFill="#ee1b1b" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <HBox alignment="CENTER" prefWidth="70.0" spacing="5.0" styleClass="online-status" stylesheets="@../../css/game.css">
+                                    <children>
+                                        <Circle fill="#07bb4f" radius="3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                        <Label text="Online" textFill="#07bb4f" />
+                                    </children>
+                                </HBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+            <HBox fx:id="canvasContainer" alignment="CENTER" VBox.vgrow="SOMETIMES" />
+                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="70.0" styleClass="green-button-container" stylesheets="@../../css/game.css">
+                            <children>
+                                <HBox fx:id="undo" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../widgets/undo.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                                <HBox fx:id="redo" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                    <children>
+                                        <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="@../../widgets/redo.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </HBox>
+                            </children></HBox>
+                    </children>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+            </children>
+            <padding>
+                <Insets bottom="5.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+            <BorderPane.margin>
+                <Insets bottom="5.0" />
+            </BorderPane.margin>
+        </VBox>
+    </center>
+</BorderPane>

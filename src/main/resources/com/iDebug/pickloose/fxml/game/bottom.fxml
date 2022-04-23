@@ -1,0 +1,4 @@
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
+
+<HBox prefHeight="50.0" prefWidth="200.0" styleClass="footer" stylesheets="@../../css/game.css" BorderPane.alignment="CENTER" />

@@ -1,13 +1,14 @@
-module com.example.idebug {
+module com.iDebug.pickloose {
     requires javafx.controls;
     requires javafx.fxml;
-
-    requires org.controlsfx.controls;
     requires org.kordamp.bootstrapfx.core;
 
     requires com.google.gson;
-    opens com.example.idebug to com.google.gson,javafx.fxml;
-    opens com.example.idebug.network to com.google.gson;
+    requires java.desktop;
+    opens com.iDebug.pickloose to com.google.gson,javafx.fxml;
+    opens com.iDebug.pickloose.network to com.google.gson;
 
-    exports com.example.idebug;
+    exports com.iDebug.pickloose;
+    exports com.iDebug.pickloose.fxcontroller;
+    opens com.iDebug.pickloose.fxcontroller to com.google.gson, javafx.fxml;
 }
