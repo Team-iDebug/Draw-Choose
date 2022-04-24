@@ -1,7 +1,12 @@
 package com.iDebug.pickloose.network.client;
 
+import com.iDebug.pickloose.network.JsonDeserializer;
+import com.iDebug.pickloose.network.JsonSerializer;
 import com.iDebug.pickloose.network.Response;
+import com.iDebug.pickloose.network.Serializer;
 import javafx.application.Platform;
+
+import java.io.IOException;
 
 public class ClientDispatcher extends Dispatcher {
     @Override
@@ -17,6 +22,9 @@ public class ClientDispatcher extends Dispatcher {
                     });
                     case UPDATE_CANVAS -> Platform.runLater(() -> {
                         new UpdateCanvasDispatcher().dispatch(response);
+                    });
+                    case GET_CANVAS_SOCKET -> Platform.runLater(() -> {
+                        new CanvasSocketDispatcher().dispatch(response);
                     });
                 }
             }

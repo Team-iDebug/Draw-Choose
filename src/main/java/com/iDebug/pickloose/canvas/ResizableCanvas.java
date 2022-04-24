@@ -1,42 +1,102 @@
 package com.iDebug.pickloose.canvas;
 
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 
-public class ResizableCanvas {
-    private final Canvas canvas = new Canvas();
-    private double width, height;
+public class ResizableCanvas extends Canvas {
+    private TimeStack<Image> operationStack;
+    private WritableImage updatedSnap;
+    private WritableImage copySnap;
 
-    public ResizableCanvas(double width, double height) {
-        canvas.setWidth(width);
-        canvas.setHeight(height);
-        this.width = width;
-        this.height = height;
-        draw(800,600);
-        draw(300,300);
-        System.out.println(canvas.getWidth() + " "+ canvas.getHeight());
+    public ResizableCanvas() {
+        widthProperty().addListener(evt -> draw());
+        heightProperty().addListener(evt -> draw());
+        operationStack = new TimeStack<>();
     }
 
-    public void draw(double width, double height) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        Image snapshot = canvas.snapshot(null,null);
-        gc.clearRect(0, 0, this.width, this.height);
+    private void draw() {
+        double width = getWidth();
+        double height = getHeight();
 
-        double prevWidth = canvas.getWidth();
-        double prevHeight = canvas.getHeight();
-        canvas.setHeight(height);
-        canvas.setWidth(width);
-        gc.setFill(new ImagePattern(snapshot));
-        gc.fillRect(width/2 - prevWidth/2,height/2 - prevHeight/2,prevWidth,prevHeight);
+        GraphicsContext gc = getGraphicsContext2D();
+        gc.clearRect(0, 0, width, height);
 
-        this.height = height;
-        this.width = width;
+        if(updatedSnap == null)
+            return;
+        if(width < updatedSnap.getWidth())
+            gc.drawImage(updatedSnap, 0, 0, width, height);
+        else {
+            gc.drawImage(updatedSnap, width/2 -  updatedSnap.getWidth()/2, height/2 - updatedSnap.getHeight()/2);
+        }
     }
 
-    public Canvas getCanvas() {
-        return canvas;
+    @Override
+    public boolean isResizable() {
+        return true;
+    }
+
+    @Override
+    public double prefWidth(double height) {
+        return getWidth();
+    }
+
+    @Override
+    public double prefHeight(double width) {
+        return getHeight();
+    }
+
+    public void fill(Image image) {
+        getGraphicsContext2D().drawImage(image,getWidth() - image.getWidth()/2, getHeight() - image.getHeight()/2);
+    }
+
+    public void copy() {
+        copySnap = new WritableImage((int)getWidth(),(int)getHeight());
+        SnapshotParameters snapshotParameters = new SnapshotParameters();
+        snapshotParameters.setFill(Color.TRANSPARENT);
+        snapshot(snapshotParameters, copySnap);
+    }
+
+    public void paste() {
+        fill(copySnap);
+    }
+
+    public void undo() {
+        Image image = operationStack.backward();
+        GraphicsContext gc = getGraphicsContext2D();
+        if(image == null) {
+            gc.clearRect(0,0,getWidth(), getHeight());
+        }
+        else {
+            gc.drawImage(image,0,0);
+        }
+    }
+
+    public void redo() {
+        Image image = operationStack.forward();
+        GraphicsContext gc = getGraphicsContext2D();
+        if(image == null) {
+            gc.clearRect(0,0,getWidth(), getHeight());
+        }
+        else {
+            gc.drawImage(image,0,0);
+        }
+    }
+
+    public WritableImage updateSnap() {
+        updatedSnap = new WritableImage((int)getWidth(), (int)getHeight());
+        SnapshotParameters snapshotParameters = new SnapshotParameters();
+        snapshotParameters.setFill(Color.TRANSPARENT);
+        return snapshot(snapshotParameters,updatedSnap);
+    }
+
+    public void updateStack() {
+        WritableImage wi = new WritableImage((int)getWidth(), (int)getHeight());
+        SnapshotParameters snapshotParameters = new SnapshotParameters();
+        snapshotParameters.setFill(Color.TRANSPARENT);
+        operationStack.forward(snapshot(snapshotParameters,wi));
     }
 }

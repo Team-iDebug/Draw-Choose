@@ -7,7 +7,7 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 class ColorController {
-    static Color color = Color.BLACK;
+    static Color color = Color.RED;
     private ColorController() {
 
     }
@@ -23,13 +23,22 @@ class ColorController {
         WritableImage outputImage = new WritableImage(W, H);
         PixelReader reader      = inputImage.getPixelReader();
         PixelWriter writer      = outputImage.getPixelWriter();
+        float          ocR         = (float) sourceColor.getRed();
+        float          ocG         = (float) sourceColor.getGreen();
+        float          ocB         = (float) sourceColor.getBlue();
+        float          ncR         = (float) finalColor.getRed();
+        float          ncG         = (float) finalColor.getGreen();
+        float          ncB         = (float) finalColor.getBlue();
+        java.awt.Color oldColor    = new java.awt.Color(ocR, ocG, ocB);
+        java.awt.Color newColor    = new java.awt.Color(ncR, ncG, ncB);
         for (int y = 0; y < H; y++) {
             for (int x = 0; x < W; x++) {
-                Color currColor = reader.getColor(x,y);
-                if(currColor == sourceColor)
-                    writer.setColor(x,y,finalColor);
-                else
-                    writer.setColor(x,y,currColor);
+                int            argb       = reader.getArgb(x, y);
+                java.awt.Color pixelColor = new java.awt.Color(argb, true);
+                writer.setArgb(x, y,
+                        pixelColor.equals(oldColor) ?
+                                newColor.getRGB() :
+                                pixelColor.getRGB());
             }
         }
         return outputImage;

@@ -1,21 +1,15 @@
 package com.iDebug.pickloose.network.server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class ServerListener extends Thread {
-    protected BufferedReader in;
-    protected Socket socket;
-
-    ServerListener(Socket socket) throws IOException {
-        this.socket = socket;
-        this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+public class GameServerListener extends Listener {
+    GameServerListener(Socket socket) throws IOException {
+        super(socket);
     }
 
     @Override
-    public void run() {
+    void handle() {
         try {
             boolean alive = true;
             String req = null;

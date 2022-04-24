@@ -17,6 +17,7 @@ public class Request {
         this.sender = sender;
         this.service = service;
     }
+
     public Request(User sender, SERVICE service, String body) {
         this.sender = sender;
         this.service = service;

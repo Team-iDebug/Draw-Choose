@@ -1,5 +1,6 @@
 package com.iDebug.pickloose.canvas;
 
+import java.awt.*;
 import java.util.Stack;
 
 class TimeStack<T> {
@@ -28,5 +29,8 @@ class TimeStack<T> {
                 return null;
             return undoStack.peek();
         }
+    }
+    public T peek() {
+        return undoStack.peek();
     }
 }

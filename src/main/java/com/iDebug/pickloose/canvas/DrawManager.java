@@ -1,19 +1,13 @@
 package com.iDebug.pickloose.canvas;
 
 import com.iDebug.pickloose.NetworkManager;
-import com.iDebug.pickloose.network.SERVICE;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 
 public class DrawManager {
     private static DrawManager drawManager;
@@ -21,10 +15,8 @@ public class DrawManager {
     private Point2D prevMouseLocation;
     private Tool selectedTool;
     private Color selectedColor;
-    private Canvas canvas;
+    private ResizableCanvas canvas;
     private GraphicsContext graphicsContext;
-    private double CANVAS_HEIGHT = 700;
-    private double CANVAS_WIDTH = 1000;
 
     private DrawManager() {
         selectedTool = new OilBrush();
@@ -48,16 +40,9 @@ public class DrawManager {
 
     public void updateAndOperate(double x, double y) {
         updateMouseLocation(x,y);
+        canvas.updateSnap();
+        NetworkManager.sendStream(x + " " + y);
         selectedTool.operate();
-        WritableImage snap = canvas.snapshot(null,null);
-        String msg = new String();
-        try {
-            ImageIO.write((RenderedImage) snap,msg,System.out);
-            NetworkManager.sendReqAsAuthUser(SERVICE.UPDATE_CANVAS, msg);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void updateMouseLocation(double x, double y) {
@@ -77,7 +62,7 @@ public class DrawManager {
         return canvas;
     }
 
-    public void setCanvas(Canvas canvas) {
+    public void setCanvas(ResizableCanvas canvas) {
         this.canvas = canvas;
         graphicsContext = canvas.getGraphicsContext2D();
     }
@@ -102,39 +87,21 @@ public class DrawManager {
         mouseLocation = new Point2D(x,y);
     }
 
-    Image canvasSnap;
-    TimeStack<Image> images;
-
     public void copyCanvas() {
         System.out.println("copied!!!");
-        canvasSnap = canvas.snapshot(null,null);
+        canvas.copy();
     }
 
     public void pasteCanvas() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.drawImage(canvasSnap,0,0);
+        canvas.paste();
     }
 
     public void undo() {
-        Image image = images.backward();
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        if(image == null) {
-            gc.clearRect(0,0,canvas.getWidth(), canvas.getHeight());
-        }
-        else {
-            gc.drawImage(image,0,0);
-        }
+        canvas.undo();
     }
 
     public void redo() {
-        Image image = images.forward();
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        if(image == null) {
-            gc.clearRect(0,0,canvas.getWidth(), canvas.getHeight());
-        }
-        else {
-            gc.drawImage(image,0,0);
-        }
+        canvas.redo();
     }
 
     public void listenMouseEvent(MouseEvent e) {

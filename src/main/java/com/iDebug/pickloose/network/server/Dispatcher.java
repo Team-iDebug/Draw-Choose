@@ -18,7 +18,7 @@ public abstract class Dispatcher {
     }
 
     static void broadcastRespond(Response response) {
-        var clients = ClientManager.getInstance().getClients();
+        var clients = Manager.getInstance().getClients();
         clients.forEach((user,socket) -> {
             System.out.println("ami eikhane...");
             try {
@@ -32,7 +32,7 @@ public abstract class Dispatcher {
     }
 
     static void broadcastExcludeRespond(Response response,Socket...sockets) throws IOException {
-        var clients = ClientManager.getInstance().getClients();
+        var clients = Manager.getInstance().getClients();
         HashSet<Socket> _sockets = new HashSet<>();
         for (var socket : sockets)
             _sockets.add(socket);

@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
@@ -144,7 +145,7 @@
                         </HBox>
                     </children>
                 </HBox>
-            <HBox fx:id="canvasContainer" alignment="CENTER" VBox.vgrow="SOMETIMES" />
+            <Pane fx:id="canvasContainer" VBox.vgrow="SOMETIMES" />
                 <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
                     <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="70.0" styleClass="green-button-container" stylesheets="@../../css/game.css">

@@ -1,5 +1,6 @@
 package com.iDebug.pickloose.network.client;
 
+import com.google.gson.annotations.Expose;
 import com.iDebug.pickloose.network.Request;
 import com.iDebug.pickloose.network.SERVICE;
 import com.iDebug.pickloose.User;
@@ -13,15 +14,21 @@ import java.net.Socket;
  */
 
 public class Client {
+    @Expose
+    private String ip;
+    @Expose
+    private int port;
     Socket socket;
 
-    public Client(String ip, int port) throws Exception {
-        socket = new Socket(ip,port);
+    public Client(String ip, int port) {
+        this.ip = ip;
+        this.port = port;
     }
 
     public void start() {
         try {
-            new Listener(socket).start();
+            socket = new Socket(ip,port);
+            new GameClientListener(socket).startListening();
         }
         catch (Exception e) {
 //            e.printStackTrace();
@@ -55,5 +62,17 @@ public class Client {
                 client.sendMsg(clientDeserializedReq);
             }
         }
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public Socket getSocket() {
+        return socket;
     }
 }

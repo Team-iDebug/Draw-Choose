@@ -2,11 +2,13 @@ package com.iDebug.pickloose.network;
 
 import com.iDebug.pickloose.User;
 import com.iDebug.pickloose.network.client.Client;
+import com.iDebug.pickloose.network.server.GameServerListener;
 import com.iDebug.pickloose.network.server.Server;
 
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
+        /*
         Server server = null;
         Client client = null;
 
@@ -16,8 +18,8 @@ public class Main {
         String req2 = Request.deserialize(new Request(user, SERVICE.NEW_MESSAGE, "Hello World"));
 
         try {
-            server = new Server();
-            server.start();
+//            server = new Server(6969,new GameServerListener());
+//            server.start();
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -34,5 +36,7 @@ public class Main {
         client.sendMsg(req1);
         client.sendMsg(req2);
         client.sendMsg(req2);
+
+         */
     }
 }

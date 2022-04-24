@@ -13,7 +13,7 @@ class AddUserDispatcher extends Dispatcher {
     @Override
     void dispatch(Request request, Socket socket) throws IOException {
         AuthUser user = new AuthUser(request.getSender());
-        ClientManager.getInstance().add(user, socket);
+        Manager.getInstance().add(user, socket);
         Response response = new Response(request.getService(), FEEDBACK.SUCCEED, User.deserialize(user));
         individualRespond(response,socket);
     }

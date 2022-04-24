@@ -1,6 +1,5 @@
 package com.iDebug.pickloose.network.server;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -12,16 +11,28 @@ import java.net.Socket;
 
 public class Server extends Thread {
     private ServerSocket server;
-    public Server() throws IOException {
-        server = new ServerSocket(6969);
+    protected Class requestListener;
+    private int port;
+
+    public Server(int port, Class requestListener) {
+        this.port = port;
+        this.requestListener = requestListener;
     }
     @Override
     public void run() {
+        try {
+            server = new ServerSocket(port);
+        }
+        catch (Exception e) {
+            System.out.println("Could not establish the server");
+        }
+        System.out.println("server started...");
         while (true) {
             try {
                 Socket socket = server.accept();
                 System.out.println("client added...");
-                new ServerListener(socket).start();
+                Listener listener = (Listener) requestListener.getDeclaredConstructor(Socket.class).newInstance(socket);
+                listener.startListening();
             }
             catch (Exception e) {
                 e.printStackTrace();
@@ -31,11 +42,19 @@ public class Server extends Thread {
 
     public static void main(String[] args) {
         try {
-            new Server().start();
+            new Server(6969, GameServerListener.class).start();
         }
         catch (Exception e) {
 //            e.printStackTrace();
 
         }
+    }
+
+    public ServerSocket getServer() {
+        return server;
+    }
+
+    public int getPort() {
+        return port;
     }
 }
