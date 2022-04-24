@@ -14,17 +14,16 @@ class GameClientListener extends Listener {
 
     @Override
     void handle() {
-        boolean alive = true;
         String response = null;
+        System.out.println("started listening...");
         try {
-            while (alive) {
+            while (true) {
                 try {
                     response = in.readLine();
                     if(response != null)
                         new ClientDispatcher().dispatch(Response.serialize(response));
                 } catch (IOException e) {
-//                    e.printStackTrace();
-                    alive = false;
+                    e.printStackTrace();
                 }
             }
         }

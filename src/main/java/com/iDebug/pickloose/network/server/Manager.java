@@ -39,9 +39,15 @@ class Manager {
 
     public ServerSocket getCanvasStream() {
         if(streamServerSocket == null) {
-            Server streamServer = new Server(9696,CanvasStreamListener.class);
-            streamServer.start();
-            streamServerSocket = streamServer.getServer();
+            Server server = null;
+            try {
+                server = new Server(0, CanvasStreamListener.class);
+                server.start();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            streamServerSocket = server.getServer();
         }
         return streamServerSocket;
     }

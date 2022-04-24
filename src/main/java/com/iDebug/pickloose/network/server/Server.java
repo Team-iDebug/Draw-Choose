@@ -1,5 +1,7 @@
 package com.iDebug.pickloose.network.server;
 
+import javafx.application.Platform;
+
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -17,16 +19,15 @@ public class Server extends Thread {
     public Server(int port, Class requestListener) {
         this.port = port;
         this.requestListener = requestListener;
-    }
-    @Override
-    public void run() {
         try {
             server = new ServerSocket(port);
         }
         catch (Exception e) {
-            System.out.println("Could not establish the server");
+            e.printStackTrace();
         }
-        System.out.println("server started...");
+    }
+    @Override
+    public void run() {
         while (true) {
             try {
                 Socket socket = server.accept();
@@ -42,11 +43,12 @@ public class Server extends Thread {
 
     public static void main(String[] args) {
         try {
-            new Server(6969, GameServerListener.class).start();
+            Server server = new Server(0, GameServerListener.class);
+            System.out.println(server.getServer().getLocalPort());
+            server.start();
         }
         catch (Exception e) {
-//            e.printStackTrace();
-
+            e.printStackTrace();
         }
     }
 

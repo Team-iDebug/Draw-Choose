@@ -20,7 +20,6 @@ public abstract class Dispatcher {
     static void broadcastRespond(Response response) {
         var clients = Manager.getInstance().getClients();
         clients.forEach((user,socket) -> {
-            System.out.println("ami eikhane...");
             try {
                 individualRespond(response,socket);
                 System.out.println(user.getUsername() + " is sent.");

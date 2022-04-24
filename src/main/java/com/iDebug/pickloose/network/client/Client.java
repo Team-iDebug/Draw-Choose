@@ -30,8 +30,11 @@ public class Client {
             socket = new Socket(ip,port);
             new GameClientListener(socket).startListening();
         }
+        catch (NullPointerException e) {
+            System.out.println("connection not found!!!");
+        }
         catch (Exception e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -41,26 +44,6 @@ public class Client {
         }
         catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public static void main(String[] args) {
-        Client client = null;
-        try {
-            client = new Client("127.0.0.1", 6969);
-            client.start();
-        }
-        catch (Exception e) {
-//            e.printStackTrace();
-            System.out.println("could not connect");
-        }
-        if(client != null) {
-            User user = new User("nayemislamzr", "192.168.0.1");
-            Request clientRequest = new Request(user, SERVICE.ADD_USER);
-            String clientDeserializedReq = Request.deserialize(clientRequest);
-            for(int i = 0 ; i < 10 ; i++) {
-                client.sendMsg(clientDeserializedReq);
-            }
         }
     }
 
