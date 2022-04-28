@@ -1,7 +1,6 @@
 package com.iDebug.pickloose.network.server;
 
 import com.iDebug.pickloose.AuthUser;
-import com.iDebug.pickloose.network.client.Client;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -12,13 +11,17 @@ import java.util.HashMap;
 
 class Manager {
     private ArrayList<OutputStream> clientOutputStreams;
-    private HashMap<AuthUser, Socket> clients;
+    private HashMap<String, AuthUser>  UserMap;
+    private ArrayList<AuthUser> users;
+    private HashMap<String, Socket> socketMap;
     private static Manager manager;
     private ServerSocket gameServerSocket;
     private ServerSocket streamServerSocket;
 
     private Manager() {
-        clients = new HashMap<>();
+        clientOutputStreams = new ArrayList<>();
+        users = new ArrayList<>();
+        socketMap = new HashMap<>();
     }
     static Manager getInstance() {
         if(manager == null)
@@ -26,11 +29,12 @@ class Manager {
         return manager;
     }
     void add(AuthUser user, Socket socket) throws IOException {
-        clients.put(user,socket);
+        socketMap.put(user.getToken(),socket);
+        users.add(user);
         clientOutputStreams.add(socket.getOutputStream());
     }
-    HashMap<AuthUser, Socket> getClients() {
-        return clients;
+    HashMap<String, Socket> getClients() {
+        return socketMap;
     }
 
     public ArrayList<OutputStream> getClientOutputStreams() {
@@ -50,5 +54,9 @@ class Manager {
             streamServerSocket = server.getServer();
         }
         return streamServerSocket;
+    }
+
+    public ArrayList<AuthUser> getUsers() {
+        return users;
     }
 }

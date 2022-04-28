@@ -49,7 +49,7 @@ public class FXMessageController {
         Message msg = new Message(NetworkManager.getInstance().getUser().getUsername(),
                 LocalTime.now().toString(),msgText, MSG_STATUS.SENT);
         guiNewMsg(msg,OBSERVER.SENDER);
-        NetworkManager.sendReqAsAuthUser(SERVICE.NEW_MESSAGE,Message.deSerialize(msg));
+        NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.NEW_MESSAGE,Message.deSerialize(msg));
     }
 
     @FXML

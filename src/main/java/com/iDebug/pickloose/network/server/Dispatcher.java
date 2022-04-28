@@ -22,7 +22,6 @@ public abstract class Dispatcher {
         clients.forEach((user,socket) -> {
             try {
                 individualRespond(response,socket);
-                System.out.println(user.getUsername() + " is sent.");
             } catch (IOException e) {
                 // janina ki korbo
                 System.out.println("golmaal");

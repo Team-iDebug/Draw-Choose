@@ -2,6 +2,7 @@ package com.iDebug.pickloose.network;
 
 public enum SERVICE {
     ADD_USER,
+    GET_AUTH,
     READD_USER,
     DELETE_USER,
     SET_GAME_SETTINGS,

@@ -20,7 +20,7 @@ public class FXCanvasController {
 
     private void networkRequest() {
         try {
-            NetworkManager.sendReqAsAuthUser(SERVICE.GET_CANVAS_SOCKET);
+            NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.GET_CANVAS_SOCKET);
         }
         catch (Exception e) {
             System.out.println("Could Not Establish Canvas Socket Connection");

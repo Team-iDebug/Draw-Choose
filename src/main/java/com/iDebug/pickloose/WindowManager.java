@@ -32,6 +32,7 @@ public class WindowManager {
         try {
             switch (scene) {
                 case HOMEPAGE -> setScene("fxml/homepage/homepage.fxml", "css/homepage.css");
+                case LOBBY -> setScene("fxml/lobby/lobby.fxml", "css/lobby.css");
                 case GAME -> setScene("fxml/game/main.fxml","css/game.css");
             }
         }

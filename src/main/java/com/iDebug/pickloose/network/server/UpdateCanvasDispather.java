@@ -12,7 +12,7 @@ public class UpdateCanvasDispather extends Dispatcher {
 
     @Override
     void dispatch(Request request, Socket socket) throws IOException {
-        Response response = new Response(SERVICE.UPDATE_CANVAS, FEEDBACK.SUCCEED,request.getBody());
+        Response response = new Response(request.getService(), FEEDBACK.SUCCEED,request.getBody());
         broadcastExcludeRespond(response,socket);
     }
 }

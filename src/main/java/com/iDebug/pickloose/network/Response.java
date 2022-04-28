@@ -53,7 +53,7 @@ public class Response {
 
     public static void main(String[] args) {
         AuthUser user = new AuthUser("nayem","192.168.0.1");
-        Response response = new Response(SERVICE.ADD_USER, FEEDBACK.SUCCEED, new Gson().toJson(user,AuthUser.class));
+        Response response = new Response(SERVICE.ADD_USER, FEEDBACK.SUCCEED, new Gson().toJson(user, AuthUser.class));
         System.out.println(response.status);
         String deserialized = Response.deserialize(response);
         System.out.println(deserialized);

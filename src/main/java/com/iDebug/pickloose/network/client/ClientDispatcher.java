@@ -10,8 +10,11 @@ public class ClientDispatcher extends Dispatcher {
         new Thread(() -> {
             try {
                 switch (response.getService()) {
+                    case GET_AUTH -> Platform.runLater(() -> {
+                        new GetAuthDispatcher().dispatch(response);
+                    });
                     case ADD_USER -> Platform.runLater(() -> {
-                        new AddUserDispather().dispatch(response);
+                        new AddUserDispatcher().dispatch(response);
                     });
                     case NEW_MESSAGE -> Platform.runLater(() -> {
                         new NewMessageDispatcher().dispatch(response);
@@ -21,6 +24,9 @@ public class ClientDispatcher extends Dispatcher {
                     });
                     case GET_CANVAS_SOCKET -> Platform.runLater(() -> {
                         new CanvasSocketDispatcher().dispatch(response);
+                    });
+                    case GET_ALL_MEMEBER -> Platform.runLater(() -> {
+                        new GetAllMemberDispatcher().dispatch(response);
                     });
                 }
             }

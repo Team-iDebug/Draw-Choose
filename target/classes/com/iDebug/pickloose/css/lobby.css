@@ -1,0 +1,73 @@
+* {
+    -fx-white: #FFFFFF;
+    -fx-green: #07BB4F;
+    -fx-light-yellow: #F5EAC2;
+    -fx-yellow: #F9A826;
+    -fx-dark-yellow: #C88700;
+    -fx-light-grey: #797979;
+    -fx-black: #040A00;
+    -fx-grey: #DBDBDB;
+     fx-light-grey: #F1F1F1;
+    -fx-light-red: #FFCBCB;
+    -fx-red: #E54343;
+}
+
+.root {
+    -fx-background-color: -fx-grey;
+}
+
+.card {
+    -fx-background-color: -fx-white;
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-padding: 0 10 0 10;
+    -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 1.0, 0.0, 1.0, 1.0);
+}
+
+.title-container {
+    -fx-background-color: -fx-white;
+    -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 1.0, 0.0, 1.0, 1.0);
+}
+
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-yellow;
+}
+
+.semi-title {
+    -fx-font-size: 12px;
+    -fx-text-fill: -fx-light-grey;
+}
+
+.option-text {
+    -fx-font-size: 16px;
+    -fx-text-fill: -fx-black;
+}
+
+.option-text-field {
+    -fx-pref-width: 35;
+    -fx-pref-height: 25;
+    -fx-font-size: 12px;
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+}
+
+.copy-container {
+    -fx-background-color: -fx-light-yellow;
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-padding: 5 5 5 5;
+}
+
+.butt-on {
+    -fx-background-color: -fx-yellow;
+    -fx-text-fill: -fx-dark-yellow;
+    -fx-font-size: 14px;
+    -fx-font-weight: 700;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 12 12 12 12;
+    -fx-border-color: -fx-white;
+    -fx-border-width: 5;
+    -fx-effect: dropshadow(gaussian, rgba(234,218,75, 0.25), 1.0, 4.0, 1.0, 1.0);
+}

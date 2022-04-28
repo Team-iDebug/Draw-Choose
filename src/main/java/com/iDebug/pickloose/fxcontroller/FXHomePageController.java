@@ -76,10 +76,9 @@ public class FXHomePageController {
     }
 
     private boolean validateServerAddress(String serverAddress) {
-//        Pattern pattern = Pattern.compile("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[0-9]+$");
-//        Matcher matcher = pattern.matcher(serverAddress);
-//        return (matcher.find());
-        return true;
+        Pattern pattern = Pattern.compile("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[0-9]+$");
+        Matcher matcher = pattern.matcher(serverAddress);
+        return (matcher.find());
     }
 
     private String joinGameDialogueBox() {
@@ -96,11 +95,11 @@ public class FXHomePageController {
     private void sendJoinGameRequest(String server, int port) {
         try {
             Client client = new Client(server,port);
-            NetworkManager.getInstance().setClient(client);
+            NetworkManager.getInstance().setGameClient(client);
             client.start();
             Platform.runLater(() -> {
-                NetworkManager.sendReqAsUser(SERVICE.ADD_USER, User.deserialize(NetworkManager.getInstance().getUser()));
-                WindowManager.getWindowManager().setScene(SCENES.GAME);
+                NetworkManager.getInstance().sendReqAsUser(SERVICE.GET_AUTH, User.deserialize(NetworkManager.getInstance().getUser()));
+                WindowManager.getWindowManager().setScene(SCENES.LOBBY);
             });
         }
         catch (Exception e) {

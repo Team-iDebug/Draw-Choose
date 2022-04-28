@@ -16,10 +16,12 @@ public class ServerDispatcher extends Thread {
     public void dispatch(Request req) {
         try {
             switch (req.getService()) {
-                case ADD_USER -> new AddUserDispatcher().dispatch(req, socket);
+                case GET_AUTH -> new GetAuthDispatcher().dispatch(req, socket);
+                case ADD_USER -> new AddUserDispatcher().dispatch(req,socket);
                 case NEW_MESSAGE -> new NewMessageDispatcher().dispatch(req, socket);
                 case UPDATE_CANVAS -> new UpdateCanvasDispather().dispatch(req,socket);
                 case GET_CANVAS_SOCKET -> new CanvasSocketDispatcher().dispatch(req,socket);
+                case GET_ALL_MEMEBER -> new GetAllMemberDispatcher().dispatch(req,socket);
             }
         }
         catch (IOException e) {

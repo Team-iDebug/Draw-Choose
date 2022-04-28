@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" stylesheets="@../../css/lobby.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iDebug.pickloose.fxcontroller.FXLobbyController">
+   <top>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" styleClass="title-container" stylesheets="@../../css/lobby.css">
+               <children>
+                  <HBox alignment="CENTER" spacing="10.0" stylesheets="@../../css/lobby.css">
+                     <children>
+                        <Label styleClass="title" stylesheets="@../../css/lobby.css" text="PickLoose">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets top="1.0" />
+         </BorderPane.margin>
+      </VBox>
+   </top>
+   <center>
+      <HBox alignment="CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="5.0" />
+         </BorderPane.margin>
+         <children>
+            <VBox prefWidth="250.0" spacing="5.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" spacing="10.0" styleClass="card" stylesheets="@../../css/lobby.css">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../widgets/rounds.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="Rounds" />
+                           </children>
+                        </HBox>
+                        <TextField styleClass="option-text-field" stylesheets="@../../css/lobby.css" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" spacing="10.0" styleClass="card" stylesheets="@../../css/lobby.css">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../widgets/time.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="Round Duration" />
+                           </children>
+                        </HBox>
+                        <TextField styleClass="option-text-field" stylesheets="@../../css/lobby.css" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" spacing="10.0" styleClass="card" stylesheets="@../../css/lobby.css">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../widgets/rounds.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="Difficulty" />
+                           </children>
+                        </HBox>
+                        <TextField styleClass="option-text-field" stylesheets="@../../css/lobby.css" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" spacing="10.0" styleClass="card" stylesheets="@../../css/lobby.css">
+                     <children>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../widgets/rounds.png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="Maximum Guess" />
+                           </children>
+                        </HBox>
+                        <TextField styleClass="option-text-field" stylesheets="@../../css/lobby.css" />
+                     </children>
+                  </HBox>
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="250.0" styleClass="butt-on" stylesheets="@../../css/lobby.css" text="START" textFill="#a48007">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox fx:id="playerContainer" prefHeight="200.0" prefWidth="300.0" spacing="5.0" />
+            <VBox prefWidth="220.0" spacing="5.0">
+               <children>
+                  <VBox prefWidth="100.0" styleClass="card" stylesheets="@../../css/lobby.css">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../widgets/question.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="About" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label styleClass="semi-title" stylesheets="@../../css/lobby.css" text="PickLoose is a free multiplayer drawing and guessing game.One game consists of a few rounds in which every round someone has to draw their chosen word and others have to guess it to gain points!The person with the most points at the end of game will then be crowned as the winner!" wrapText="true" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox prefWidth="100.0" styleClass="card" stylesheets="@../../css/lobby.css">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../widgets/console.png" />
+                                 </image>
+                              </ImageView>
+                              <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="How to play" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <Label styleClass="semi-title" stylesheets="@../../css/lobby.css" text="When its your turn to draw, you will have to choose a word from three options and visualize that word in 80 seconds, alternatively when somebody else is drawing you have to type your guess into the chat to gain points, be quick, the earlier you guess a word the more points you get!" wrapText="true" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></VBox>
+         </children>
+      </HBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" spacing="5.0" styleClass="card" stylesheets="@../../css/lobby.css">
+               <children>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label fx:id="serverAddress" styleClass="option-text" stylesheets="@../../css/lobby.css" text="192.168.1.104:15046" />
+                     </children>
+                  </HBox>
+                  <HBox stylesheets="@../../css/lobby.css">
+                     <children>
+                        <HBox alignment="CENTER" styleClass="copy-container" stylesheets="@../../css/lobby.css">
+                           <children>
+                              <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../widgets/copy.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="5.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

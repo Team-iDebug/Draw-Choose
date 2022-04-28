@@ -8,12 +8,21 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class AvatarFactory {
-    final private static String location = "src/main/resources/com/example/idebug/avatar/avatar.json";
-    static JsonObject avatars = null;
+    final private static String location = "src/main/resources/com/iDebug/pickloose/avatar/avatar.json";
+    private static AvatarFactory avatarFactory;
+    private JsonObject avatars;
 
-    public static void load () {
-        if (avatars != null) // already loaded
-            return;
+    private AvatarFactory() {
+        avatars = null;
+    }
+
+    public static AvatarFactory getInstance() {
+        if(avatarFactory == null)
+            avatarFactory = new AvatarFactory();
+        return avatarFactory;
+    }
+
+    private void load () {
         StringBuffer buffer = new StringBuffer();
         try {
             File f = new File(location);
@@ -26,10 +35,12 @@ public class AvatarFactory {
             e.printStackTrace();
         }
         avatars = new Gson().fromJson(buffer.toString(),JsonObject.class);
+        System.out.println("loaded");
     }
 
-    public static String getAvatar(String code) {
-        load();
+    public String getAvatar(String code) {
+        if(avatars == null || !avatars.isJsonNull())
+            load();
         if(avatars.has(code))
             return avatars.get(code).getAsString();
         return null;

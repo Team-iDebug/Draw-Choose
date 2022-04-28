@@ -41,7 +41,7 @@ public class DrawManager {
     public void updateAndOperate(double x, double y) {
         updateMouseLocation(x,y);
         canvas.updateSnap();
-        NetworkManager.sendStream(x + " " + y);
+        NetworkManager.getInstance().sendStream(x + " " + y);
         selectedTool.operate();
     }
 
