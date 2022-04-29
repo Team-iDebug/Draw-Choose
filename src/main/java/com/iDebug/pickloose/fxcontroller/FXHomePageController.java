@@ -98,7 +98,7 @@ public class FXHomePageController {
             client.start();
             Platform.runLater(() -> {
                 NetworkManager.getInstance().sendReqAsUser(SERVICE.GET_AUTH, User.deserialize(NetworkManager.getInstance().getUser()));
-                WindowManager.getWindowManager().setScene(SCENES.LOBBY);
+                WindowManager.getInstance().setScene(SCENES.LOBBY);
             });
         }
         catch (Exception e) {
@@ -125,7 +125,7 @@ public class FXHomePageController {
                 NetworkManager.getInstance().setUser(new User(getUserName(),getSelectedAvatar()));
                 String text = joinGameDialogueBox();
                 if(validateServerAddress(text)) {
-                    LobbyManager.getInstance().setUserMode(USER_MODE.NORMAL);
+                    GameManager.getInstance().setUserMode(USER_MODE.NORMAL);
                     ArrayList<String> parsedString = new ArrayList<String>(Arrays.asList(text.split(":")));
                     String serverIP = parsedString.get(0);
                     int port = Integer.parseInt(parsedString.get(1));
@@ -141,7 +141,7 @@ public class FXHomePageController {
             messageBox.setVisible(false);
             if(validateInputs()) {
                 NetworkManager.getInstance().setUser(new User(getUserName(),getSelectedAvatar()));
-                LobbyManager.getInstance().setUserMode(USER_MODE.HOST);
+                GameManager.getInstance().setUserMode(USER_MODE.HOST);
                 Server server = new Server(0, GameServerListener.class);
                 server.start();
                 String serverIP = server.getSocket().getInetAddress().getHostAddress();

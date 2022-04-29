@@ -25,6 +25,15 @@ public class ClientDispatcher extends Dispatcher {
                     case GET_GAME_SETTINGS -> Platform.runLater(() -> {
                         new GetGameSettingsDispatcher().dispatch(response);
                     });
+                    case SET_READY -> Platform.runLater(() -> {
+                        new SetReadyDispatcher().dispatch(response);
+                    });
+                    case SET_NOT_READY -> Platform.runLater(() -> {
+                        new SetNotReadyDispatcher().dispatch(response);
+                    });
+                    case START_GAME -> Platform.runLater(() -> {
+                        new StartGameDispatcher().dispatch(response);
+                    });
                     case NEW_MESSAGE -> Platform.runLater(() -> {
                         new NewMessageDispatcher().dispatch(response);
                     });
@@ -34,7 +43,7 @@ public class ClientDispatcher extends Dispatcher {
                     case GET_CANVAS_SOCKET -> Platform.runLater(() -> {
                         new CanvasSocketDispatcher().dispatch(response);
                     });
-                    case GET_ALL_MEMEBER -> Platform.runLater(() -> {
+                    case GET_ALL_MEMBER -> Platform.runLater(() -> {
                         new GetAllMemberDispatcher().dispatch(response);
                     });
                 }

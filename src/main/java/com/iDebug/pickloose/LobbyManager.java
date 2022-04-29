@@ -1,7 +1,6 @@
 package com.iDebug.pickloose;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,6 +11,7 @@ import javafx.scene.layout.VBox;
 import java.util.HashMap;
 
 public class LobbyManager {
+
     class GUIPlayer {
         private AuthUser player;
         private HBox playerCard;
@@ -54,16 +54,25 @@ public class LobbyManager {
 
             return playerCard;
         }
+        public void setReady() {
+            status.setImage(new Image("D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\widgets\\ready.png"));
+        }
+        public void setNotReady() {
+            status.setImage(new Image("D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\widgets\\not-ready.png"));
+        }
         GUIPlayer(AuthUser player) {
             this.player = player;
             container.getChildren().add(getGUI());
+        }
+
+        public void setHost() {
+            status.setImage(new Image("D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\widgets\\host.png"));
         }
     }
 
     private static LobbyManager lobbyManager;
     private VBox container;
     private HashMap<String, LobbyManager.GUIPlayer> GUIPlayers;
-    private USER_MODE userMode;
     private GUIGameSettings guiGameSettings;
 
     private LobbyManager() {
@@ -84,20 +93,12 @@ public class LobbyManager {
     }
 
     public void addPlayer(AuthUser player) {
-        GUIPlayers.put(player.token, new GUIPlayer(player));
+        GUIPlayers.put(player.getToken(), new GUIPlayer(player));
     }
 
     public void removePlayer(AuthUser user) {
         GUIPlayer guiPlayer = GUIPlayers.get(user.getToken());
         container.getChildren().remove(guiPlayer.playerCard);
-    }
-
-    public USER_MODE getUserMode() {
-        return userMode;
-    }
-
-    public void setUserMode(USER_MODE userMode) {
-        this.userMode = userMode;
     }
 
     public void setGuiGameSettings(GUIGameSettings guiGameSettings) {
@@ -107,4 +108,14 @@ public class LobbyManager {
     public void setGuiGameSettings(GameSettings gameSettings) {
         guiGameSettings.set(gameSettings);
     }
+
+    public void setReady(AuthUser user) {
+        GUIPlayers.get(user.getToken()).setReady();
+    }
+
+    public void setNotReady(AuthUser user) {
+        GUIPlayers.get(user.getToken()).setNotReady();
+    }
+
+    public void setHost(AuthUser user) { GUIPlayers.get(user.getToken()).setHost();}
 }

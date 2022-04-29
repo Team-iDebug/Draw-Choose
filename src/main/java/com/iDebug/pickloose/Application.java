@@ -11,8 +11,8 @@ public class Application extends javafx.application.Application {
             stage.close();
             // stop all threads
         });
-        WindowManager.getWindowManager().setStage(stage);
-        WindowManager.getWindowManager().setScene(SCENES.HOMEPAGE);
+        WindowManager.getInstance().setStage(stage);
+        WindowManager.getInstance().setScene(SCENES.HOMEPAGE);
         stage.show();
     }
 

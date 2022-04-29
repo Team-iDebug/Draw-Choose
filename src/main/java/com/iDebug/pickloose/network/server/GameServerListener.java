@@ -18,7 +18,7 @@ public class GameServerListener extends Listener {
             while (alive) {
                 try {
                     req = in.readLine();
-                    System.out.println(req);
+                    System.out.println("Server :" + req);
                     if(req != null) {
                         new ServerDispatcher(socket, req).start();
                     }

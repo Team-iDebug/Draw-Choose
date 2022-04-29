@@ -71,3 +71,7 @@
     -fx-border-width: 5;
     -fx-effect: dropshadow(gaussian, rgba(234,218,75, 0.25), 1.0, 4.0, 1.0, 1.0);
 }
+
+.settings-val-container {
+    -fx-background-color: -fx-yellow;
+}

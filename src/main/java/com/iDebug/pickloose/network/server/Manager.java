@@ -18,7 +18,7 @@ class Manager {
     private HashMap<String, AuthUser>  tokenAuthUserMapping;
     private ArrayList<AuthUser> users;
     private HashMap<String, Socket> tokenSocketMapping;
-    private HashSet<AuthUser> readyUsers;
+    private HashSet<String> readyUsers; // token
     private static Manager manager;
     private ServerSocket gameServerSocket;
     private ServerSocket streamServerSocket;
@@ -94,14 +94,21 @@ class Manager {
     }
 
     public void setReady(AuthUser user) {
-        readyUsers.add(user);
+        readyUsers.add(user.getToken());
     }
 
-    public boolean isAllReady(AuthUser user) {
+    public void setNotReady(AuthUser user) {readyUsers.remove(user.getToken());}
+
+    public boolean isAllReady() {
+        System.out.println(users.size() + " " + readyUsers.size());
         for(var u : users) {
-            if(!readyUsers.contains(u))
+            if(!readyUsers.contains(u.getToken()))
                 return false;
         }
         return true;
+    }
+
+    public boolean isHost(AuthUser authSender) {
+        return (authSender.getToken().equals(host.getToken()));
     }
 }

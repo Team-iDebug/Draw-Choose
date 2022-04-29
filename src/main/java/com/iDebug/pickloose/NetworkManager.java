@@ -1,8 +1,10 @@
 package com.iDebug.pickloose;
 
+import com.google.gson.Gson;
 import com.iDebug.pickloose.network.Request;
 import com.iDebug.pickloose.network.SERVICE;
 import com.iDebug.pickloose.network.client.Client;
+import javafx.application.Platform;
 
 
 public class NetworkManager {
@@ -22,29 +24,32 @@ public class NetworkManager {
     }
 
     public void sendReqAsAuthUser(SERVICE service, String text) {
-        Client client = NetworkManager.getInstance().getGameClient();
-        AuthUser user = NetworkManager.getInstance().getAuthUser();
-        Request request = new Request(user,service,text);
-        client.sendMsg(Request.deserialize(request));
+        Request request = new Request(authUser,service,text);
+        if(request.getSender() == null)
+            MessageBus.getInstance().add(request);
+        else
+            gameClient.sendMsg(Request.deserialize(request));
     }
 
     public void sendReqAsUser(SERVICE service, String text) {
-        Client client = NetworkManager.getInstance().getGameClient();
-        User user = NetworkManager.getInstance().getUser();
         Request request = new Request(user,service,text);
-        client.sendMsg(Request.deserialize(request));
+        gameClient.sendMsg(Request.deserialize(request));
     }
 
     public void sendReqAsAuthUser(SERVICE service) {
-        Client client = NetworkManager.getInstance().getGameClient();
-        User user = NetworkManager.getInstance().getUser();
-        Request request = new Request(user,service);
-        client.sendMsg(Request.deserialize(request));
+        Request request = new Request(authUser,service);
+        if(request.getSender() == null)
+            MessageBus.getInstance().add(request);
+        else
+            gameClient.sendMsg(new Gson().toJson(request));
+    }
+
+    public void sendReq(Request request) {
+        gameClient.sendMsg(new Gson().toJson(request));
     }
 
     public void sendStream(String msg) {
         try {
-            Client streamClient = NetworkManager.getInstance().streamClient;
             streamClient.sendMsg(msg);
         }
         catch (NullPointerException e) {
@@ -83,4 +88,6 @@ public class NetworkManager {
     public void setStreamClient(Client streamClient) {
         this.streamClient = streamClient;
     }
+
+
 }

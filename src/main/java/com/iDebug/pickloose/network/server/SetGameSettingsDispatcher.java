@@ -14,6 +14,6 @@ class SetGameSettingsDispatcher extends Dispatcher {
     void dispatch(Request request, Socket socket) throws IOException {
         GameSettings gameSettings = new Gson().fromJson(request.getBody(),GameSettings.class);
         Manager.getInstance().setGameSettings(gameSettings);
-        broadcastRespond(new Response(request.getService(), FEEDBACK.SUCCEED,request.getBody()));
+        broadcastExcludeRespond(new Response(request.getService(), FEEDBACK.SUCCEED,request.getBody()),socket);
     }
 }

@@ -9,10 +9,11 @@ import java.io.IOException;
 public class WindowManager {
     private static WindowManager windowManager;
     private Stage stage;
-    private WindowManager() {
+    private SCENES scene;
 
+    private WindowManager() {
     }
-    public static WindowManager getWindowManager() {
+    public static WindowManager getInstance() {
         if(windowManager == null)
             windowManager = new WindowManager();
         return windowManager;
@@ -29,15 +30,24 @@ public class WindowManager {
         stage.setScene(scene);
     }
     public void setScene(SCENES scene) {
+        this.scene = scene;
         try {
             switch (scene) {
                 case HOMEPAGE -> setScene("fxml/homepage/homepage.fxml", "css/homepage.css");
-                case LOBBY -> setScene("fxml/lobby/lobby.fxml", "css/lobby.css");
+                case LOBBY -> {
+                    if(GameManager.getInstance().getUserMode().equals(USER_MODE.HOST))
+                        setScene("fxml/lobby/lobby-host.fxml", "css/lobby.css");
+                    else
+                        setScene("fxml/lobby/lobby-normal.fxml","css/lobby.css");
+                }
                 case GAME -> setScene("fxml/game/main.fxml","css/game.css");
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public SCENES getScene() {
+        return scene;
     }
 }
