@@ -2,8 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -53,7 +53,7 @@
                               <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="Rounds" />
                            </children>
                         </HBox>
-                        <TextField styleClass="option-text-field" stylesheets="@../../css/lobby.css" />
+                        <ChoiceBox fx:id="FXRounds" prefHeight="25.0" prefWidth="75.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="40.0" spacing="10.0" styleClass="card" stylesheets="@../../css/lobby.css">
@@ -68,7 +68,7 @@
                               <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="Round Duration" />
                            </children>
                         </HBox>
-                        <TextField styleClass="option-text-field" stylesheets="@../../css/lobby.css" />
+                        <ChoiceBox fx:id="FXRoundDuration" prefHeight="25.0" prefWidth="75.0" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="40.0" spacing="10.0" styleClass="card" stylesheets="@../../css/lobby.css">
@@ -81,9 +81,13 @@
                         <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                            <children>
                               <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="Difficulty" />
+                              <HBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <ChoiceBox fx:id="FXDifficulty" prefHeight="25.0" prefWidth="75.0" />
+                                 </children>
+                              </HBox>
                            </children>
                         </HBox>
-                        <TextField styleClass="option-text-field" stylesheets="@../../css/lobby.css" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="40.0" spacing="10.0" styleClass="card" stylesheets="@../../css/lobby.css">
@@ -98,17 +102,17 @@
                               <Label styleClass="option-text" stylesheets="@../../css/lobby.css" text="Maximum Guess" />
                            </children>
                         </HBox>
-                        <TextField styleClass="option-text-field" stylesheets="@../../css/lobby.css" />
+                        <ChoiceBox fx:id="FXMaxGuess" prefHeight="25.0" prefWidth="75.0" />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="250.0" styleClass="butt-on" stylesheets="@../../css/lobby.css" text="START" textFill="#a48007">
+                  <Button fx:id="FXGameInvoker" mnemonicParsing="false" prefHeight="40.0" prefWidth="250.0" styleClass="butt-on" stylesheets="@../../css/lobby.css" text="START" textFill="#a48007">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Button>
                </children>
             </VBox>
-            <VBox fx:id="playerContainer" prefHeight="200.0" prefWidth="300.0" spacing="5.0" />
+            <VBox fx:id="FXPlayerContainer" prefHeight="200.0" prefWidth="300.0" spacing="5.0" />
             <VBox prefWidth="220.0" spacing="5.0">
                <children>
                   <VBox prefWidth="100.0" styleClass="card" stylesheets="@../../css/lobby.css">
@@ -169,12 +173,12 @@
                <children>
                   <HBox alignment="CENTER_LEFT">
                      <children>
-                        <Label fx:id="serverAddress" styleClass="option-text" stylesheets="@../../css/lobby.css" text="192.168.1.104:15046" />
+                        <Label fx:id="FXServerAddress" styleClass="option-text" stylesheets="@../../css/lobby.css" text="192.168.1.104:15046" />
                      </children>
                   </HBox>
                   <HBox stylesheets="@../../css/lobby.css">
                      <children>
-                        <HBox alignment="CENTER" styleClass="copy-container" stylesheets="@../../css/lobby.css">
+                        <HBox fx:id="FXCopyBtn" alignment="CENTER" styleClass="copy-container" stylesheets="@../../css/lobby.css">
                            <children>
                               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

@@ -1,5 +1,6 @@
 package com.iDebug.pickloose.network.server;
 
+import com.iDebug.pickloose.GameSettings;
 import com.iDebug.pickloose.network.Request;
 import java.io.IOException;
 import java.net.Socket;
@@ -18,6 +19,10 @@ public class ServerDispatcher extends Thread {
             switch (req.getService()) {
                 case GET_AUTH -> new GetAuthDispatcher().dispatch(req, socket);
                 case ADD_USER -> new AddUserDispatcher().dispatch(req,socket);
+                case DELETE_USER -> new RemoveUserDispatcher().dispatch(req,socket);
+                case MAKE_HOST -> new MakeHostDispatcher().dispatch(req,socket);
+                case SET_GAME_SETTINGS -> new SetGameSettingsDispatcher().dispatch(req,socket);
+                case GET_GAME_SETTINGS -> new GetGameSettingsDispatcher().dispatch(req,socket);
                 case NEW_MESSAGE -> new NewMessageDispatcher().dispatch(req, socket);
                 case UPDATE_CANVAS -> new UpdateCanvasDispather().dispatch(req,socket);
                 case GET_CANVAS_SOCKET -> new CanvasSocketDispatcher().dispatch(req,socket);

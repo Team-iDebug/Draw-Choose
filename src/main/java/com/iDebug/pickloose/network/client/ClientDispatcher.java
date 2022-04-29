@@ -16,6 +16,15 @@ public class ClientDispatcher extends Dispatcher {
                     case ADD_USER -> Platform.runLater(() -> {
                         new AddUserDispatcher().dispatch(response);
                     });
+                    case DELETE_USER -> Platform.runLater(() -> {
+                        new RemoveUserDispatcher().dispatch(response);
+                    });
+                    case SET_GAME_SETTINGS -> Platform.runLater(() -> {
+                        new SetGameSettingsDispatcher().dispatch(response);
+                    });
+                    case GET_GAME_SETTINGS -> Platform.runLater(() -> {
+                        new GetGameSettingsDispatcher().dispatch(response);
+                    });
                     case NEW_MESSAGE -> Platform.runLater(() -> {
                         new NewMessageDispatcher().dispatch(response);
                     });

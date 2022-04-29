@@ -1,11 +1,10 @@
 package com.iDebug.pickloose.fxcontroller;
 
-import com.iDebug.pickloose.NetworkManager;
-import com.iDebug.pickloose.SCENES;
-import com.iDebug.pickloose.User;
-import com.iDebug.pickloose.WindowManager;
+import com.iDebug.pickloose.*;
 import com.iDebug.pickloose.network.SERVICE;
 import com.iDebug.pickloose.network.client.Client;
+import com.iDebug.pickloose.network.server.GameServerListener;
+import com.iDebug.pickloose.network.server.Server;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -126,10 +125,11 @@ public class FXHomePageController {
                 NetworkManager.getInstance().setUser(new User(getUserName(),getSelectedAvatar()));
                 String text = joinGameDialogueBox();
                 if(validateServerAddress(text)) {
+                    LobbyManager.getInstance().setUserMode(USER_MODE.NORMAL);
                     ArrayList<String> parsedString = new ArrayList<String>(Arrays.asList(text.split(":")));
-                    String server = parsedString.get(0);
+                    String serverIP = parsedString.get(0);
                     int port = Integer.parseInt(parsedString.get(1));
-                    new Thread(() -> sendJoinGameRequest(server,port)).start();
+                    new Thread(() -> sendJoinGameRequest(serverIP,port)).start();
                     System.out.println("Connecting...");
                 }
                 else {
@@ -140,7 +140,16 @@ public class FXHomePageController {
         hostButton.setOnMouseClicked(mouseEvent -> {
             messageBox.setVisible(false);
             if(validateInputs()) {
-
+                NetworkManager.getInstance().setUser(new User(getUserName(),getSelectedAvatar()));
+                LobbyManager.getInstance().setUserMode(USER_MODE.HOST);
+                Server server = new Server(0, GameServerListener.class);
+                server.start();
+                String serverIP = server.getSocket().getInetAddress().getHostAddress();
+                int port = server.getSocket().getLocalPort();
+                new Thread(()-> sendJoinGameRequest(serverIP,port)).start();
+                Platform.runLater(() -> {
+                    NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.MAKE_HOST);
+                });
             }
         });
     }

@@ -41,22 +41,18 @@ public class Server extends Thread {
         }
     }
 
+    public ServerSocket getSocket() {
+        return server;
+    }
+
     public static void main(String[] args) {
         try {
             Server server = new Server(0, GameServerListener.class);
-            System.out.println(server.getServer().getLocalPort());
+            System.out.println(server.getSocket().getLocalPort());
             server.start();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public ServerSocket getServer() {
-        return server;
-    }
-
-    public int getPort() {
-        return port;
     }
 }

@@ -5,7 +5,7 @@ import com.iDebug.pickloose.AuthUser;
 import com.iDebug.pickloose.UserManager;
 import com.iDebug.pickloose.network.Response;
 
-public class AddUserDispatcher extends Dispatcher {
+class AddUserDispatcher extends Dispatcher {
     @Override
     void dispatch(Response response) {
         try {
