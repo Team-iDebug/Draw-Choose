@@ -29,7 +29,7 @@
 }
 
 .rank {
-    -fx-background-color: transparent;
+    -fx-background-color: -fx-background;
 }
 
 .player {

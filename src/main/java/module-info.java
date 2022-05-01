@@ -6,6 +6,7 @@ module com.iDebug.pickloose {
 
     requires com.google.gson;
     requires java.desktop;
+    requires java.sql;
     opens com.iDebug.pickloose to javafx.controls,com.google.gson,javafx.fxml,org.controlsfx.controls;
     opens com.iDebug.pickloose.network to com.google.gson;
     opens com.iDebug.pickloose.network.client to com.google.gson;

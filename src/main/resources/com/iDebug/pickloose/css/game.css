@@ -29,7 +29,7 @@
 }
 
 .rank {
-    -fx-background-color: transparent;
+    -fx-background-color: -fx-background;
 }
 
 .player {
@@ -241,5 +241,6 @@
 .footer {
     -fx-background-color: -fx-white;
     -fx-border-width: 1;
-    -fx-border-color: -fx-light-grey;
+    -fx-border-color: rgba(183, 183, 183, 0.25);
+    -fx-border-style: solid hidden hidden hidden;
 }
