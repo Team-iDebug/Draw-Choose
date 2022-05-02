@@ -18,6 +18,7 @@ class GameClientListener extends Listener {
             while (alive) {
                 try {
                     response = in.readLine();
+                    System.out.println("client : " + response);
                     if(response != null)
                         new ClientDispatcher().dispatch(Response.serialize(response));
                 } catch (IOException e) {

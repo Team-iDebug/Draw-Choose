@@ -34,7 +34,7 @@
 
 .player {
     -fx-background-color: -fx-white;
-    -fx-border-color: -fx-green;
+    -fx-border-color: -fx-yellow;
     -fx-border-width: 3;
     -fx-border-style: hidden hidden hidden solid;
     -fx-padding: 2;
@@ -52,17 +52,15 @@
 }
 
 .player-name {
-    -fx-text-fill: #B7B7B7;
-    -fx-font-size: 10px;
+    -fx-text-fill: -fx-dark-yellow;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
 }
 
 .points {
-    -fx-background-color: -fx-light-green;
-    -fx-font-size: 8px;
-    -fx-text-fill: -fx-green;
-    -fx-border-radius: 2 2 2 2;
-    -fx-background-radius: 2 2 2 2;
-    -fx-padding: 2;
+    -fx-font-size: 12px;
+    -fx-text-fill: -fx-yellow;
+    -fx-font-weight: bold;
 }
 
 .player-status {
@@ -241,5 +239,6 @@
 .footer {
     -fx-background-color: -fx-white;
     -fx-border-width: 1;
-    -fx-border-color: -fx-light-grey;
+    -fx-border-color: rgba(183, 183, 183, 0.25);
+    -fx-border-style: solid hidden hidden hidden;
 }

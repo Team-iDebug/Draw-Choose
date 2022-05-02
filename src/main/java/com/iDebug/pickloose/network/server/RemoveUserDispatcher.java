@@ -9,18 +9,29 @@ import com.iDebug.pickloose.network.SERVICE;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class RemoveUserDispatcher extends Dispatcher {
     @Override
     void dispatch(Request request, Socket socket) throws IOException {
         AuthUser user = new Gson().fromJson(request.getBody(),AuthUser.class);
-        Manager.getInstance().remove(user);
+        try {
+            Manager.getInstance().remove(user);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         Response response = new Response(SERVICE.DELETE_USER, FEEDBACK.SUCCEED, request.getBody());
         broadcastRespond(response);
     }
 
     void dispatch(AuthUser user) {
-        Manager.getInstance().remove(user);
+        try {
+            Manager.getInstance().remove(user);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         String body = new Gson().toJson(user);
         Response response = new Response(SERVICE.DELETE_USER, FEEDBACK.SUCCEED, body);
         broadcastRespond(response);

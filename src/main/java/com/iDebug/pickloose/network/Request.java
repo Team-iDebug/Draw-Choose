@@ -63,7 +63,7 @@ public class Request {
         JsonObject request = new Gson().fromJson(deserialized,JsonObject.class);
         JsonObject sender = request.get("sender").getAsJsonObject();
         User user = null;
-        if(sender.has("token") && sender.has("userid")) {
+        if(sender.has("userid")) {
             user = new Gson().fromJson(sender,AuthUser.class);
         }
         else {

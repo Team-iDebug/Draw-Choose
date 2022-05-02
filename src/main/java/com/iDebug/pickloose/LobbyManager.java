@@ -27,7 +27,7 @@ public class LobbyManager {
             avatar.setAlignment(Pos.CENTER);
             ImageView image = new ImageView();
             // map avatar code to avatar image src
-            image.setImage(new Image(player.getAvatar()));
+            image.setImage(new Image(player.getAvatarSrc()));
             avatar.getChildren().add(image);
             image.setFitHeight(37);
             image.setFitWidth(40);
@@ -92,12 +92,12 @@ public class LobbyManager {
         this.container = container;
     }
 
-    public void addPlayer(AuthUser player) {
-        GUIPlayers.put(player.getToken(), new GUIPlayer(player));
+    public void addPlayer(AuthUser authUser) {
+        GUIPlayers.put(authUser.getUserid(), new GUIPlayer(authUser));
     }
 
     public void removePlayer(AuthUser user) {
-        GUIPlayer guiPlayer = GUIPlayers.get(user.getToken());
+        GUIPlayer guiPlayer = GUIPlayers.get(user.getUserid());
         container.getChildren().remove(guiPlayer.playerCard);
     }
 
@@ -110,12 +110,16 @@ public class LobbyManager {
     }
 
     public void setReady(AuthUser user) {
-        GUIPlayers.get(user.getToken()).setReady();
+        GUIPlayers.get(user.getUserid()).setReady();
+    }
+
+    public void setReady(String userid) {
+        GUIPlayers.get(userid).setReady();
     }
 
     public void setNotReady(AuthUser user) {
-        GUIPlayers.get(user.getToken()).setNotReady();
+        GUIPlayers.get(user.getUserid()).setNotReady();
     }
 
-    public void setHost(AuthUser user) { GUIPlayers.get(user.getToken()).setHost();}
+    public void setHost(AuthUser user) { GUIPlayers.get(user.getUserid()).setHost();}
 }

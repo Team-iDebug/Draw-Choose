@@ -8,12 +8,18 @@ import com.iDebug.pickloose.network.Response;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.SQLException;
 
 class GetAuthDispatcher extends Dispatcher {
     @Override
     void dispatch(Request request, Socket socket) throws IOException {
         AuthUser user = new AuthUser(request.getSender());
-        Manager.getInstance().add(user, socket);
+        try {
+            Manager.getInstance().add(user, socket);
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         Response response = new Response(request.getService(), FEEDBACK.SUCCEED, User.deserialize(user));
         individualRespond(response,socket);
     }

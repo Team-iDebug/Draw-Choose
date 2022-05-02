@@ -1,6 +1,8 @@
 package com.iDebug.pickloose.fxcontroller;
 
 import com.iDebug.pickloose.*;
+import com.iDebug.pickloose.database.client.ClientDatabase;
+import com.iDebug.pickloose.database.server.ServerDatabase;
 import com.iDebug.pickloose.network.SERVICE;
 import com.iDebug.pickloose.network.client.Client;
 import com.iDebug.pickloose.network.server.GameServerListener;
@@ -11,8 +13,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -108,6 +112,8 @@ public class FXHomePageController {
 
     @FXML
     public void initialize() {
+        // setting random client id for database
+        ClientDatabase.setUrl(String.valueOf(Math.round(Math.random()*10000)));
         ImageView avatars[] = {
                 avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7,avatar8
         };
@@ -140,6 +146,12 @@ public class FXHomePageController {
         hostButton.setOnMouseClicked(mouseEvent -> {
             messageBox.setVisible(false);
             if(validateInputs()) {
+                try {
+                    ServerDatabase.getInstance().clear();
+                }
+                catch (SQLException e) {
+                    e.printStackTrace();
+                }
                 NetworkManager.getInstance().setUser(new User(getUserName(),getSelectedAvatar()));
                 GameManager.getInstance().setUserMode(USER_MODE.HOST);
                 Server server = new Server(0, GameServerListener.class);

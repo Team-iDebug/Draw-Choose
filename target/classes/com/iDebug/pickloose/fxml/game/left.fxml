@@ -8,69 +8,69 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox minWidth="165.0" prefWidth="165.0" styleClass="rank" stylesheets="@../../css/game.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minWidth="165.0" prefWidth="165.0" styleClass="rank" stylesheets="@../../css/game.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iDebug.pickloose.fxcontroller.FXGamePlayerController">
     <BorderPane.margin>
         <Insets bottom="1.0" right="1.0" top="1.0" />
     </BorderPane.margin>
     <children>
-        <VBox spacing="2.0" stylesheets="@../../css/game.css" VBox.vgrow="ALWAYS">
+        <VBox fx:id="FXPlayerContainer" spacing="2.0" stylesheets="@../../css/game.css" VBox.vgrow="ALWAYS">
             <children>
-                <HBox maxHeight="50.0" minHeight="50.0" prefHeight="50.0" prefWidth="200.0" styleClass="player" stylesheets="@../../css/game.css">
-                    <children>
-                        <HBox maxHeight="50.0" prefHeight="100.0" prefWidth="200.0">
-                            <children>
-                                <HBox alignment="CENTER">
-                                    <children>
-                                        <HBox alignment="CENTER" maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0" styleClass="player-profile" stylesheets="@../../css/game.css">
-                                            <children>
-                                                <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../../widgets/light-profile.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </HBox>
-                                <HBox maxHeight="70.0" prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <VBox prefHeight="200.0" prefWidth="100.0">
-                                            <children>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                                    <children>
-                                                        <Label styleClass="player-name" stylesheets="@../../css/game.css" text="Nayem" />
-                                                    </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0" stylesheets="@../../css/game.css">
-                                                    <children>
-                                                        <Label styleClass="points" stylesheets="@../../css/game.css" text="60000" />
-                                                    </children>
-                                                </HBox>
-                                            </children>
-                                            <HBox.margin>
-                                                <Insets left="2.0" />
-                                            </HBox.margin>
-                                        </VBox>
-                                    </children>
-                                </HBox>
-                                <HBox alignment="CENTER" maxHeight="70.0" maxWidth="20.0" minWidth="20.0" prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                        <HBox maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" styleClass="player-status" stylesheets="@../../css/game.css">
-                                            <children>
-                                                <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                                    <image>
-                                                        <Image url="@../../widgets/yellow-brush.png" />
-                                                    </image>
-                                                </ImageView>
-                                            </children>
-                                        </HBox>
-                                    </children>
-                                </HBox>
-                            </children>
-                        </HBox>
-                    </children>
-                </HBox>
+                  <HBox maxHeight="50.0" prefHeight="100.0" prefWidth="200.0" styleClass="player" stylesheets="@../../css/game.css">
+                      <children>
+                          <HBox alignment="CENTER">
+                              <children>
+                                    <ImageView fitHeight="40.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../../avatar/girl1.png" />
+                                        </image>
+                                    </ImageView>
+                              </children>
+                          </HBox>
+                          <HBox HBox.hgrow="ALWAYS">
+                              <children>
+                                  <VBox prefHeight="200.0" prefWidth="100.0">
+                                      <children>
+                                          <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                              <children>
+                                                  <Label styleClass="player-name" stylesheets="@../../css/game.css" text="Nayem">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                              </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                          </HBox>
+                                          <HBox prefHeight="100.0" stylesheets="@../../css/game.css">
+                                              <children>
+                                                  <Label styleClass="points" stylesheets="@../../css/game.css" text="450 Points" />
+                                              </children>
+                                          </HBox>
+                                      </children>
+                                      <HBox.margin>
+                                          <Insets left="2.0" />
+                                      </HBox.margin>
+                                  </VBox>
+                              </children>
+                          </HBox>
+                          <HBox alignment="CENTER">
+                              <children>
+                                  <HBox maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" prefHeight="20.0" prefWidth="20.0" styleClass="player-status" stylesheets="@../../css/game.css">
+                                      <children>
+                                          <ImageView fitHeight="12.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                                              <image>
+                                                  <Image url="@../../widgets/yellow-brush.png" />
+                                              </image>
+                                          </ImageView>
+                                      </children>
+                                  </HBox>
+                              </children>
+                          </HBox>
+                      </children>
+                  </HBox>
             </children>
             <padding>
                 <Insets bottom="10.0" left="5.0" />
@@ -78,7 +78,7 @@
         </VBox>
         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="175.0" spacing="5.0">
             <children>
-                <Button mnemonicParsing="false" prefWidth="150.0" styleClass="butt-on" stylesheets="@../../css/game.css" text="Vote Kick" />
+                <Button fx:id="FXKickBtn" mnemonicParsing="false" prefWidth="150.0" styleClass="butt-on" stylesheets="@../../css/game.css" text="Vote Kick" />
             </children>
         </HBox>
     </children>

@@ -34,6 +34,10 @@ public class User {
     }
 
     public String getAvatar() {
+        return avatar;
+    }
+
+    public String getAvatarSrc() {
         return AvatarFactory.getInstance().getAvatar(avatar);
     }
 }

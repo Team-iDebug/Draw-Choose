@@ -8,8 +8,6 @@ import java.util.UUID;
 public class AuthUser extends User {
     @Expose
     protected String userid;
-    @Expose
-    protected String token;
 
     public AuthUser(String userid, String username, String avatar) {
         this.userid = userid;
@@ -17,23 +15,14 @@ public class AuthUser extends User {
         this.avatar = avatar;
     }
 
-    public AuthUser(String userid, String token, String username, String avatar) {
-        this.userid = userid;
-        this.token = token;
-        this.username = username;
-        this.avatar = avatar;
-    }
-
     public AuthUser(String username, String ip) {
         super(username,ip);
         this.userid = UUID.randomUUID().toString();
-        this.token = UUID.randomUUID().toString();
     }
 
     public AuthUser(User user) {
         super(user.username, user.avatar);
         this.userid = UUID.randomUUID().toString();
-        this.token = UUID.randomUUID().toString();
     }
 
     public AuthUser getPublicView(AuthUser authUser) {
@@ -46,9 +35,5 @@ public class AuthUser extends User {
 
     public String getUserid() {
         return userid;
-    }
-
-    public String getToken() {
-        return token;
     }
 }

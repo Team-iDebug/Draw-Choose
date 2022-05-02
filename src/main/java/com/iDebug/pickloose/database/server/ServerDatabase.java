@@ -4,32 +4,31 @@ import java.sql.*;
 
 import static java.sql.Types.NULL;
 
-public class Database {
-    private static Database database = null;
+public class ServerDatabase {
+    private static ServerDatabase database = null;
     private final static String url = "jdbc:sqlite:app-server.db";
     private Connection connection;
-    private Database() throws ClassNotFoundException, SQLException {
+    private ServerDatabase() throws ClassNotFoundException, SQLException {
         Class.forName("org.sqlite.JDBC");
-        createConnection();
         createUsersTableIfNotExists();
         createKicksTableIfNotExists();
         createMsgTableIfNotExists();
         createReactsTableIfNotExists();
-        closeConnection();
     }
     private void createConnection() throws SQLException {
         connection = DriverManager.getConnection(url);
     }
-    private void closeConnection() throws SQLException {
+    public void closeConnection() throws SQLException {
         connection.close();
     }
-    public static Database getInstance() {
+    public static ServerDatabase getInstance() {
         if(database == null) {
             try {
-                database = new Database();
+                database = new ServerDatabase();
             }
             catch (ClassNotFoundException e) {
                 System.out.println("Driver not installed.");
+                e.printStackTrace();
             }
             catch (SQLException e) {
                 System.out.println("Error performing SQL statement");
@@ -42,35 +41,43 @@ public class Database {
         return database;
     }
     private void createUsersTableIfNotExists() throws SQLException {
+        createConnection();
         Statement statement = connection.createStatement();
-        statement.execute("CREATE TABLE IF NOT EXISTS users(user_id varchar(32) NOT NULL,"
-                +"username varchar(32)," + "avatar varchar(16),"
-                +"points integer,"
+        statement.execute("CREATE TABLE IF NOT EXISTS users(user_id varchar(64) NOT NULL,"
+                +"username varchar(64)," + "avatar varchar(64),"
+                +"points integer," + "user_role varchar(16),"
                 +"PRIMARY KEY(user_id));");
+        closeConnection();
     }
     private void createKicksTableIfNotExists() throws SQLException {
+        createConnection();
         Statement statement = connection.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS kicks (" +
-                "kicker varchar(32) NOT NULL REFERENCES users(user_id)," +
-                "vodai varchar(32) NOT NULL REFERENCES users(user_id)," +
+                "kicker varchar(64) NOT NULL REFERENCES users(user_id)," +
+                "vodai varchar(64) NOT NULL REFERENCES users(user_id)," +
                 "PRIMARY KEY(kicker,vodai));");
+        closeConnection();
     }
     private void createMsgTableIfNotExists() throws SQLException {
+        createConnection();
         Statement statement = connection.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS messages ("+
-                "msg_id varchar(32) NOT NULL,"+
-                "sender_id varchar(32) NOT NULL,"+
+                "msg_id varchar(64) NOT NULL,"+
+                "sender_id varchar(64) NOT NULL,"+
                 "message text,"+
                 "time varchar(32),"+
                 "PRIMARY KEY(msg_id));");
+        closeConnection();
     }
     private void createReactsTableIfNotExists() throws SQLException {
+        createConnection();
         Statement statement = connection.createStatement();
         statement.execute("CREATE TABLE IF NOT EXISTS reactions (" +
-                "reactor_id varchar(32) NOT NULL REFERENCES users(user_id)," +
-                "msg_id varchar(32) NOT NULL REFERENCES messages(msg_id)," +
+                "reactor_id varchar(64) NOT NULL REFERENCES users(user_id)," +
+                "msg_id varchar(64) NOT NULL REFERENCES messages(msg_id)," +
                 "react varchar(16) NOT NULL," +
                 "PRIMARY KEY(reactor_id,msg_id));");
+        closeConnection();
     }
     public void addUser(String user_id, String username, String avatar) throws SQLException {
         createConnection();
@@ -101,24 +108,28 @@ public class Database {
         preparedStatement.execute();
         closeConnection();
     }
-    public void getUserInfo(String user_id) throws SQLException {
+    public ResultSet getUserInfo(String user_id) throws SQLException {
         createConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE user_id = ?");
         preparedStatement.setString(1,user_id);
-        preparedStatement.executeQuery();
-        closeConnection();
+        return preparedStatement.executeQuery();
     }
-    public void getAllUser() throws SQLException {
+    public ResultSet getAllUser() throws SQLException {
         createConnection();
         Statement statement = connection.createStatement();
-        statement.executeQuery("SELECT * FROM users");
-        closeConnection();
+        ResultSet resultSet = statement.executeQuery("SELECT user_id,username,avatar FROM users;");
+        return resultSet;
+    }
+    public ResultSet getAllUserID() throws SQLException {
+        createConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT user_id FROM users;");
+        return resultSet;
     }
     public void getAllUsersOrderByPoints() throws SQLException {
         createConnection();
         Statement statement = connection.createStatement();
         statement.executeQuery("SELECT * FROM users ORDER BY points DESC");
-        closeConnection();
     }
     public void deleteUser(String user_id) throws SQLException {
         createConnection();
@@ -127,11 +138,41 @@ public class Database {
         preparedStatement.execute();
         closeConnection();
     }
+    public ResultSet getAllUserRole() throws SQLException {
+        createConnection();
+        Statement statement = connection.createStatement();
+        return statement.executeQuery("SELECT user_id, user_role FROM users;");
+    }
+    public void updateRole(String user_id, String user_role) throws SQLException {
+        createConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("UPDATE users SET user_role = ? WHERE user_id = ?;");
+        preparedStatement.setString(1,user_role);
+        preparedStatement.setString(2,user_id);
+        preparedStatement.execute();
+        closeConnection();
+    }
+    public ResultSet getHost() throws SQLException {
+        createConnection();
+        Statement statement = connection.createStatement();
+        return statement.executeQuery("SELECT user_id,username,avatar FROM users WHERE role='HOST';");
+    }
+    public ResultSet hostAssigned() throws SQLException {
+        createConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT COUNT(user_id) FROM users WHERE user_role='HOST'");
+        return resultSet;
+    }
+    public ResultSet isHost(String user_id) throws SQLException {
+        createConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT user_role FROM users WHERE user_id = ?;");
+        preparedStatement.setString(1,user_id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        return resultSet;
+    }
     public void getAllMessages() throws SQLException {
         createConnection();
         Statement statement = connection.createStatement();
         statement.execute("SELECT * FROM messages;");
-        closeConnection();
     }
     /*
         Get most reacts on a message
@@ -142,7 +183,6 @@ public class Database {
                 "FROM reactions WHERE msg_id=? GROUP BY react LIMIT 3;");
         preparedStatement.setString(1,msg_id);
         preparedStatement.execute();
-        closeConnection();
     }
     /*
         Get the user details of whom gave certain react on a message
@@ -156,7 +196,6 @@ public class Database {
         preparedStatement.setString(1,msg_id);
         preparedStatement.setString(2,react);
         preparedStatement.execute();
-        closeConnection();
     }
     /*
         Get all messages of a given user.
@@ -166,7 +205,6 @@ public class Database {
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM messages WHERE sender_id = ?");
         statement.setString(1,sender_id);
         statement.execute();
-        closeConnection();
     }
     /*
         Get the kick counts
@@ -178,7 +216,6 @@ public class Database {
                 "from kicks JOIN users where vodai = ? AND kicks.vodai=users.user_id;");
         preparedStatement.setString(1,vodai);
         preparedStatement.execute();
-        closeConnection();
     }
     /*
         Get the kickers who kicked a vodai
@@ -190,7 +227,6 @@ public class Database {
                 "kicks WHERE kicks.vodai = ? AND kicks.kicker=users.user_id;");
         preparedStatement.setString(1,vodai);
         preparedStatement.execute();
-        closeConnection();
     }
     public void display(ResultSet result) throws SQLException {
         createConnection();
@@ -199,14 +235,34 @@ public class Database {
                     + " username: " + result.getString(3) + " points: " + result.getInt(4));
         }
     }
-    public void drop() throws SQLException {
+    public void clear() throws SQLException {
         createConnection();
         Statement statement = connection.createStatement();
-        statement.execute("DROP TABLE users;");
-        statement.execute("DROP TABLE kicks;");
-        statement.execute("DROP TABLE messages;");
-        statement.execute("DROP TABLE reactions;");
+        statement.execute("DELETE FROM users;");
+        statement.execute("DELETE FROM kicks;");
+        statement.execute("DELETE FROM messages;");
+        statement.execute("DELETE FROM reactions;");
         closeConnection();
     }
+
+    public static void main(String[] args) {
+//        try {
+//            Database.getInstance().clear();
+//            Database.getInstance().addUser("user1","nayem","avatar1");
+//            Boolean res = (Database.getInstance().hostAssigned());
+//            Database.getInstance().closeConnection();
+//            if(!res)
+//                Database.getInstance().updateRole("user1","HOST");
+//            Database.getInstance().updateRole("user1","HOST");
+//            ResultSet resultSet = Database.getInstance().getUserInfo("user1");
+//            System.out.println(resultSet.getString("username") + " " + resultSet.getString("user_role"));
+//            Database.getInstance().closeConnection();
+//        }
+//        catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+
 }
 

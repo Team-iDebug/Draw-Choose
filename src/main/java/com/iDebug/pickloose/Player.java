@@ -12,11 +12,6 @@ public class Player extends AuthUser {
         this.points = 0;
     }
 
-    public Player(String userid, String token, String username, String avatar) {
-        super(userid, token, username, avatar);
-        this.points = 0;
-    }
-
     public Player(String username, String ip) {
         super(username, ip);
         this.points = 0;

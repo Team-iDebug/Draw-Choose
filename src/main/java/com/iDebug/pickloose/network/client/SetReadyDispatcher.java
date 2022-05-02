@@ -11,7 +11,7 @@ class SetReadyDispatcher extends Dispatcher {
         try {
             System.out.println("Client : " + response.getBody());
             AuthUser user = new Gson().fromJson(response.getBody(),AuthUser.class);
-            System.out.println(user.getToken());
+            System.out.println(user.getUserid());
             LobbyManager.getInstance().setReady(user);
         }
         catch (NullPointerException e) {
