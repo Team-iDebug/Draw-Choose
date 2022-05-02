@@ -29,6 +29,7 @@ public class ServerDispatcher extends Thread {
                 case UPDATE_CANVAS -> new UpdateCanvasDispather().dispatch(req,socket);
                 case GET_CANVAS_SOCKET -> new CanvasSocketDispatcher().dispatch(req,socket);
                 case GET_ALL_MEMBER -> new GetAllMemberDispatcher().dispatch(req,socket);
+                case SET_TOOL -> new SetToolDispatcher().dispatch(req,socket);
             }
         }
         catch (IOException e) {

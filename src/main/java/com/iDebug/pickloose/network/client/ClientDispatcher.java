@@ -49,6 +49,9 @@ public class ClientDispatcher extends Dispatcher {
                     case GET_ALL_MEMBER -> Platform.runLater(() -> {
                         new GetAllMemberDispatcher().dispatch(response);
                     });
+                    case SET_TOOL -> Platform.runLater(() -> {
+                        new SetToolDispatcher().dispatch(response);
+                    });
                 }
             }
             catch (Exception e) {

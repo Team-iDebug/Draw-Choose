@@ -12,6 +12,7 @@ import javafx.scene.shape.Shape;
 
 public abstract class Tool {
     public abstract void operate();
+    public abstract void listenEvent(int x, int y, String event);
     public abstract void listenMouseEvent(MouseEvent e);
 
     public static Image createTexture(Shape shape, String texture, double opacity) {

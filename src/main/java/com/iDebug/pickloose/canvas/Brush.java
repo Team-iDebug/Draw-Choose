@@ -13,12 +13,22 @@ abstract class Brush extends Tool {
     protected Image texture;
 
     @Override
+    public void listenEvent(int x, int y, String event) {
+        if(event.equals("MOUSE_DRAGGED")) {
+            DrawManager.getInstance().updateAndOperate(x,y,event);
+        }
+        else if(event.equals("MOUSE_PRESSED")) {
+            DrawManager.getInstance().updateMouseLocation(x,y,event);
+        }
+    }
+
+    @Override
     public void listenMouseEvent(MouseEvent e) {
         if(MouseEvent.MOUSE_DRAGGED.equals(e.getEventType())) {
             DrawManager.getInstance().updateAndOperate(e.getX(),e.getY(),e.getEventType());
         }
         else if (MouseEvent.MOUSE_PRESSED.equals(e.getEventType())) {
-            DrawManager.getInstance().updateMouseLocation(e.getX(), e.getY(),e.getEventType());
+            DrawManager.getInstance().updateMouseLocation(e.getX(), e.getY(),e.getEventType() );
         }
     }
 

@@ -20,7 +20,7 @@ public class GameClientListener extends Listener {
                     if(response != null)
                         new ClientDispatcher().dispatch(Response.serialize(response));
                 } catch (IOException e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     alive = false;
                 }
             }

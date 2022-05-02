@@ -60,6 +60,13 @@ public class Fill extends Tool {
     }
 
     @Override
+    public void listenEvent(int x, int y, String event) {
+        if (event.equals("MOUSE_CLICKED")) {
+            DrawManager.getInstance().updateAndOperate(x,y,event);
+        }
+    }
+
+    @Override
     public void listenMouseEvent(MouseEvent e) {
         if (e.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
             DrawManager.getInstance().updateAndOperate(e.getX(),e.getY(),e.getEventType());

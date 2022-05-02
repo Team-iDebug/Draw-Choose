@@ -45,15 +45,24 @@ public class FXCanvasController {
     public void setupTools() {
         HBox[] tools = {FXPencil,FXBrush,FXEraser,FXSpray,FXFill};
         HashMap<HBox,Tool> toolMap = new HashMap<>();
+        HashMap<HBox,TOOLS> toolEnum = new HashMap<>();
+
         toolMap.put(FXPencil,new NaturalPencil());
         toolMap.put(FXBrush,new OilBrush());
         toolMap.put(FXEraser,new Eraser());
         toolMap.put(FXSpray, new Spray());
         toolMap.put(FXFill,new Fill());
 
+        toolEnum.put(FXPencil,TOOLS.PENCIL);
+        toolEnum.put(FXBrush,TOOLS.BRUSH);
+        toolEnum.put(FXEraser,TOOLS.ERASER);
+        toolEnum.put(FXSpray,TOOLS.SPRAY);
+        toolEnum.put(FXFill,TOOLS.FILL);
+
         for(var tool : tools) {
             tool.setOnMouseClicked(e -> {
                 DrawManager.getInstance().setSelectedTool(toolMap.get(tool));
+                NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.SET_TOOL,toolEnum.get(tool).toString());
             });
         }
 

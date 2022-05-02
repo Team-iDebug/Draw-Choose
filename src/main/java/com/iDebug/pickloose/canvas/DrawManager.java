@@ -38,6 +38,12 @@ public class DrawManager {
         graphicsContext.drawImage(image,0,0);
     }
 
+    public void updateAndOperate(int x, int y, String event) {
+        updateMouseLocation(x,y,event);
+        selectedTool.operate();
+        canvas.updateSnap();
+    }
+
     public void updateAndOperate(double x, double y,EventType event) {
         updateMouseLocation(x,y,event);
         selectedTool.operate();
@@ -45,9 +51,15 @@ public class DrawManager {
         NetworkManager.getInstance().sendToolAction(String.valueOf(x),String.valueOf(y),event.getName());
     }
 
+    public void updateMouseLocation(int x, int y, String event) {
+        this.prevMouseLocation = mouseLocation;
+        this.mouseLocation = new Point2D(x,y);
+    }
+
     public void updateMouseLocation(double x, double y,EventType event) {
         this.prevMouseLocation = mouseLocation;
         this.mouseLocation = new Point2D(x,y);
+        NetworkManager.getInstance().sendToolAction(String.valueOf(x),String.valueOf(y),event.getName());
     }
 
     public Tool getSelectedTool() {
@@ -106,6 +118,10 @@ public class DrawManager {
 
     public void clearCanvas() {
         canvas.clear();
+    }
+
+    public void listenEvent(int x, int y, String event) {
+        selectedTool.listenEvent(x,y,event);
     }
 
     public void listenMouseEvent(MouseEvent e) {
