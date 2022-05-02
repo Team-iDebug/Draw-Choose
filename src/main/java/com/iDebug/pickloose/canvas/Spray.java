@@ -35,7 +35,7 @@ public class Spray extends Tool {
     @Override
     public void listenMouseEvent(MouseEvent e) {
         if (e.getEventType().equals(MouseEvent.MOUSE_CLICKED) || e.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
-            DrawManager.getInstance().updateAndOperate(e.getX(),e.getY());
+            DrawManager.getInstance().updateAndOperate(e.getX(),e.getY(),e.getEventType());
         }
     }
 }

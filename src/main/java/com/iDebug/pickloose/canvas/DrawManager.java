@@ -1,11 +1,11 @@
 package com.iDebug.pickloose.canvas;
 
 import com.iDebug.pickloose.NetworkManager;
+import javafx.event.EventType;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 
@@ -38,14 +38,14 @@ public class DrawManager {
         graphicsContext.drawImage(image,0,0);
     }
 
-    public void updateAndOperate(double x, double y) {
-        updateMouseLocation(x,y);
-//        NetworkManager.getInstance().sendStream(x + " " + y);
+    public void updateAndOperate(double x, double y,EventType event) {
+        updateMouseLocation(x,y,event);
         selectedTool.operate();
         canvas.updateSnap();
+        NetworkManager.getInstance().sendToolAction(String.valueOf(x),String.valueOf(y),event.getName());
     }
 
-    public void updateMouseLocation(double x, double y) {
+    public void updateMouseLocation(double x, double y,EventType event) {
         this.prevMouseLocation = mouseLocation;
         this.mouseLocation = new Point2D(x,y);
     }
@@ -58,7 +58,7 @@ public class DrawManager {
         this.selectedTool = selectedTool;
     }
 
-    public Canvas getCanvas() {
+    public ResizableCanvas getCanvas() {
         return canvas;
     }
 

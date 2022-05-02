@@ -1,10 +1,13 @@
 package com.iDebug.pickloose;
 
 import com.google.gson.Gson;
+import com.iDebug.pickloose.canvas.DrawManager;
 import com.iDebug.pickloose.network.Request;
 import com.iDebug.pickloose.network.SERVICE;
 import com.iDebug.pickloose.network.client.Client;
-import javafx.application.Platform;
+import javafx.scene.image.WritableImage;
+
+import java.io.IOException;
 
 
 public class NetworkManager {
@@ -48,9 +51,13 @@ public class NetworkManager {
         gameClient.sendMsg(new Gson().toJson(request));
     }
 
-    public void sendStream(String msg) {
+    public void sendToolAction(String x, String y, String action) {
         try {
-            streamClient.sendMsg(msg);
+            String w = String.valueOf(DrawManager.getInstance().getCanvas().getWidth());
+            String h = String.valueOf(DrawManager.getInstance().getCanvas().getHeight());
+            String toolAction = x+","+y+","+w+","+h+","+action;
+//            streamClient.sendToolAction(toolAction);
+            streamClient.sendMsg(toolAction);
         }
         catch (NullPointerException e) {
             System.out.println("No Stream Client Found!!!");

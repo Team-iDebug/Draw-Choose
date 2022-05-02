@@ -15,9 +15,11 @@ abstract class Listener {
     }
 
     public void startListening() {
-        new Thread(() -> {
+        Thread thread = new Thread(() -> {
             handle();
-        }).start();
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     abstract void handle();

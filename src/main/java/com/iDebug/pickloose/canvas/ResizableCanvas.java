@@ -105,4 +105,8 @@ public class ResizableCanvas extends Canvas {
         gc.clearRect(0,0,getWidth(),getHeight());
         updateSnap();
     }
+
+    public WritableImage getUpdatedSnap() {
+        return updatedSnap;
+    }
 }

@@ -1,28 +1,52 @@
 package com.iDebug.pickloose.network.server;
 
+import javafx.application.Platform;
+
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 
 class CanvasStreamListener extends Listener {
     CanvasStreamListener(Socket socket) throws IOException {
         super(socket);
     }
 
+    private void broadCastStream(String toolAction, Socket excludeSocket) {
+        Platform.runLater(()-> {
+            var clients = Manager.getInstance().getCanvasUserSockets();
+            clients.forEach((socket)->{
+                if(!socket.equals(excludeSocket)) {
+                    try {
+                        PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+                        out.println(toolAction);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        });
+    }
+
     @Override
     void handle() {
         Thread t = new Thread(() -> {
-            try {
-                String data = null;
-                while (true) {
-                    data = in.readLine();
-                    PrintWriter out = new PrintWriter(socket.getOutputStream());
-                    out.println(data);
+            boolean alive = true;
+
+            /*
+            System.out.println("----------server-----------");
+            System.out.println("server canvas socket listening");
+            System.out.println("----------------------------");
+             */
+
+            while (alive) {
+                try {
+                    String toolAction = in.readLine();
+                    broadCastStream(toolAction,socket);
+                    System.out.println(toolAction);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    alive = false;
                 }
-            } catch (IOException ex) {
-                //TODO make a callback on exception.
             }
         });
         t.setDaemon(true);

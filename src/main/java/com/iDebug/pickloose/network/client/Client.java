@@ -1,10 +1,9 @@
 package com.iDebug.pickloose.network.client;
 
 import com.google.gson.annotations.Expose;
-import com.iDebug.pickloose.network.Request;
-import com.iDebug.pickloose.network.SERVICE;
-import com.iDebug.pickloose.User;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 /*
@@ -18,17 +17,21 @@ public class Client {
     private String ip;
     @Expose
     private int port;
+    @Expose
+    private Class responseListener;
     Socket socket;
 
-    public Client(String ip, int port) {
+    public Client(String ip, int port, Class listener) {
         this.ip = ip;
         this.port = port;
+        this.responseListener = listener;
     }
 
     public void start() {
         try {
             socket = new Socket(ip,port);
-            new GameClientListener(socket).startListening();
+            Listener listener = (Listener) responseListener.getDeclaredConstructor(Socket.class).newInstance(socket);
+            listener.startListening();
         }
         catch (NullPointerException e) {
             System.out.println("connection not found!!!");
@@ -41,6 +44,26 @@ public class Client {
     public void sendMsg(String request) {
         try {
             new Writer(socket, request).start();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendToolAction(String toolAction) {
+        try {
+            Thread thread = new Thread(() ->{
+                try {
+                    PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
+                    out.println(toolAction);
+                    out.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            });
+            thread.setDaemon(true);
+            thread.start();
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -97,7 +97,7 @@
             <children>
                 <VBox prefWidth="100.0" styleClass="button-container" stylesheets="@../../css/game.css">
                     <children>
-                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                        <HBox fx:id="FXColorPallete" alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
                             <children>
                                 <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                                     <image>

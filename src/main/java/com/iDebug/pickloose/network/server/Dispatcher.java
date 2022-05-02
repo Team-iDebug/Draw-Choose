@@ -23,8 +23,7 @@ public abstract class Dispatcher {
             try {
                 individualRespond(response,socket);
             } catch (IOException e) {
-                // janina ki korbo
-                System.out.println("golmaal");
+                e.printStackTrace();
             }
         });
     }

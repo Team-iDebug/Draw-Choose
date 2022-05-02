@@ -15,6 +15,7 @@ import java.util.HashSet;
 class Manager {
     private HashMap<Socket, String> socketUseridMapping;
     private HashMap<String, Socket> useridSocketMapping;
+    private ArrayList<Socket> canvasUserSockets;
     private HashSet<String> readyUsers; // token
     private static Manager manager;
     private ServerSocket gameServerSocket;
@@ -24,6 +25,7 @@ class Manager {
     private Manager() {
         socketUseridMapping = new HashMap<>();
         useridSocketMapping = new HashMap<>();
+        canvasUserSockets = new ArrayList<>();
         readyUsers = new HashSet<>();
     }
     static Manager getInstance() {
@@ -184,5 +186,13 @@ class Manager {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public void addCanvasUser(Socket socket) {
+        canvasUserSockets.add(socket);
+    }
+
+    public ArrayList<Socket> getCanvasUserSockets() {
+        return canvasUserSockets;
     }
 }

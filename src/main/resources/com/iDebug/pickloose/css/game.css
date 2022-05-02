@@ -112,6 +112,8 @@
     -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 1.0, 0.0, 2.0, 1.0);
     -fx-border-radius: 10 10 10 10;
     -fx-background-radius: 10 10 10 10;
+    -fx-border-color: -fx-green;
+    -fx-border-width: 1px;
 }
 
 .online-status {

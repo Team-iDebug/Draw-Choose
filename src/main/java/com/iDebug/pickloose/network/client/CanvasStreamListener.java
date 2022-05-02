@@ -11,15 +11,19 @@ public class CanvasStreamListener extends Listener {
     @Override
     void handle() {
         Thread t = new Thread(() -> {
-            System.out.println("canvas stream started...");
-            try {
-                String data = null;
-                while (true) {
+            boolean alive = true;
+            String data = null;
+            while (alive) {
+                try {
+                    /*
+                        data = posX,posY,width,height,mouse event type
+                     */
                     data = in.readLine();
-                    System.out.println(data);
                 }
-            } catch (IOException ex) {
-                //TODO make a callback on exception.
+                catch (IOException e) {
+                    e.printStackTrace();
+                    alive = false;
+                }
             }
         });
         t.setDaemon(true);

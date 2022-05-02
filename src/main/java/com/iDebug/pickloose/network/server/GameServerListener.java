@@ -1,7 +1,5 @@
 package com.iDebug.pickloose.network.server;
 
-import com.iDebug.pickloose.network.Request;
-
 import java.io.IOException;
 import java.net.Socket;
 
@@ -18,7 +16,6 @@ public class GameServerListener extends Listener {
             while (alive) {
                 try {
                     req = in.readLine();
-                    System.out.println("Server :" + req);
                     if(req != null) {
                         new ServerDispatcher(socket, req).start();
                     }
@@ -35,7 +32,6 @@ public class GameServerListener extends Listener {
             try {
                 socket.close();
                 new RemoveUserDispatcher().dispatch(Manager.getInstance().getUser(socket));
-                System.out.println("socket closed.");
             }
             catch (Exception e) {
                 e.printStackTrace();

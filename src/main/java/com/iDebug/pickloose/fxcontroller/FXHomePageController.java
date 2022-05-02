@@ -5,6 +5,7 @@ import com.iDebug.pickloose.database.client.ClientDatabase;
 import com.iDebug.pickloose.database.server.ServerDatabase;
 import com.iDebug.pickloose.network.SERVICE;
 import com.iDebug.pickloose.network.client.Client;
+import com.iDebug.pickloose.network.client.GameClientListener;
 import com.iDebug.pickloose.network.server.GameServerListener;
 import com.iDebug.pickloose.network.server.Server;
 import javafx.application.Platform;
@@ -97,7 +98,7 @@ public class FXHomePageController {
 
     private void sendJoinGameRequest(String server, int port) {
         try {
-            Client client = new Client(server,port);
+            Client client = new Client(server,port, GameClientListener.class);
             NetworkManager.getInstance().setGameClient(client);
             client.start();
             Platform.runLater(() -> {

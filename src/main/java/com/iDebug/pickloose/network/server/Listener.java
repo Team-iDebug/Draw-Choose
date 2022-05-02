@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-abstract class Listener {
+public abstract class Listener {
     protected BufferedReader in;
     protected Socket socket;
 
@@ -15,9 +15,11 @@ abstract class Listener {
     }
 
     public void startListening() {
-        new Thread(() -> {
+        Thread thread = new Thread(() -> {
             handle();
-        }).start();
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     abstract void handle();

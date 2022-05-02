@@ -7,12 +7,8 @@ public class Application extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        stage.setOnCloseRequest(e -> {
-            stage.close();
-            // stop all threads
-        });
         WindowManager.getInstance().setStage(stage);
-        WindowManager.getInstance().setScene(SCENES.GAME);
+        WindowManager.getInstance().setScene(SCENES.HOMEPAGE);
         stage.show();
     }
 

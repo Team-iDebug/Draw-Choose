@@ -30,6 +30,8 @@ public class FXCanvasController {
     private HBox FXFill;
     @FXML
     private HBox FXClearCanvas;
+    @FXML
+    private HBox FXColorPallete;
 
     private void networkRequest() {
         try {

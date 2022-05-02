@@ -15,10 +15,10 @@ abstract class Brush extends Tool {
     @Override
     public void listenMouseEvent(MouseEvent e) {
         if(MouseEvent.MOUSE_DRAGGED.equals(e.getEventType())) {
-            DrawManager.getInstance().updateAndOperate(e.getX(),e.getY());
+            DrawManager.getInstance().updateAndOperate(e.getX(),e.getY(),e.getEventType());
         }
         else if (MouseEvent.MOUSE_PRESSED.equals(e.getEventType())) {
-            DrawManager.getInstance().updateMouseLocation(e.getX(), e.getY());
+            DrawManager.getInstance().updateMouseLocation(e.getX(), e.getY(),e.getEventType());
         }
     }
 

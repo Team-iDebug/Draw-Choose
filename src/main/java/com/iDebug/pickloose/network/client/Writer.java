@@ -13,12 +13,12 @@ class Writer extends Thread {
         this.socket = socket;
         this.out = new PrintWriter(socket.getOutputStream(), true);
         this.msg = msg;
+        setDaemon(true);
     }
 
     @Override
     public void run() {
         try {
-            System.out.println(msg);
             out.println(msg);
         }
         catch (Exception e) {
