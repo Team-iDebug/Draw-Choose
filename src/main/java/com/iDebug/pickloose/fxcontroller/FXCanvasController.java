@@ -1,22 +1,35 @@
 package com.iDebug.pickloose.fxcontroller;
 
 import com.iDebug.pickloose.NetworkManager;
-import com.iDebug.pickloose.canvas.DrawManager;
-import com.iDebug.pickloose.canvas.ResizableCanvas;
+import com.iDebug.pickloose.canvas.*;
 import com.iDebug.pickloose.network.SERVICE;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.util.HashMap;
+
 public class FXCanvasController {
     @FXML
-    Pane canvasContainer;
+    private Pane canvasContainer;
 
     @FXML
-    HBox undo;
+    private HBox undo;
     @FXML
-    HBox redo;
+    private HBox redo;
+    @FXML
+    private HBox FXPencil;
+    @FXML
+    private HBox FXBrush;
+    @FXML
+    private HBox FXEraser;
+    @FXML
+    private HBox FXSpray;
+    @FXML
+    private HBox FXFill;
+    @FXML
+    private HBox FXClearCanvas;
 
     private void networkRequest() {
         try {
@@ -27,9 +40,31 @@ public class FXCanvasController {
         }
     }
 
+    public void setupTools() {
+        HBox[] tools = {FXPencil,FXBrush,FXEraser,FXSpray,FXFill};
+        HashMap<HBox,Tool> toolMap = new HashMap<>();
+        toolMap.put(FXPencil,new NaturalPencil());
+        toolMap.put(FXBrush,new OilBrush());
+        toolMap.put(FXEraser,new Eraser());
+        toolMap.put(FXSpray, new Spray());
+        toolMap.put(FXFill,new Fill());
+
+        for(var tool : tools) {
+            tool.setOnMouseClicked(e -> {
+                DrawManager.getInstance().setSelectedTool(toolMap.get(tool));
+            });
+        }
+
+        FXClearCanvas.setOnMouseClicked(e -> {
+            DrawManager.getInstance().clearCanvas();
+        });
+    }
+
     @FXML
     public void initialize() {
         networkRequest();
+        setupTools();
+
         ResizableCanvas canvas = new ResizableCanvas();
         DrawManager.getInstance().setCanvas(canvas);
         DrawManager.getInstance().setCanvas(canvas);

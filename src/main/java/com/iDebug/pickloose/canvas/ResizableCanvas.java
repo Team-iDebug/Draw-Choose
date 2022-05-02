@@ -99,4 +99,10 @@ public class ResizableCanvas extends Canvas {
         snapshotParameters.setFill(Color.TRANSPARENT);
         operationStack.forward(snapshot(snapshotParameters,wi));
     }
+
+    public void clear() {
+        GraphicsContext gc = getGraphicsContext2D();
+        gc.clearRect(0,0,getWidth(),getHeight());
+        updateSnap();
+    }
 }

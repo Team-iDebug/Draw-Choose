@@ -4,12 +4,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-public class NaturalPencil extends Brush {
-    public NaturalPencil() {
-        textureFile = "D:\\softwareDev\\canvas2\\src\\main\\resources\\com\\example\\canvas2\\watercolor.png";
+public class Eraser extends Brush {
+    public Eraser() {
         shape = new Circle(5);
-        opacity = 0.2;
-        texture = createTexture(this, Color.BLACK, Color.GREEN);
+        texture = createTexture(shape,Color.WHITE);
     }
 
     @Override

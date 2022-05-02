@@ -13,6 +13,9 @@ public class ClientDispatcher extends Dispatcher {
                     case GET_AUTH -> Platform.runLater(() -> {
                         new GetAuthDispatcher().dispatch(response);
                     });
+                    case MAKE_HOST -> Platform.runLater(() -> {
+                        new MakeHostDispatcher().dispatch(response);
+                    });
                     case ADD_USER -> Platform.runLater(() -> {
                         new AddUserDispatcher().dispatch(response);
                     });

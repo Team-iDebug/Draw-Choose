@@ -4,9 +4,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-class OilBrush extends Brush {
+public class OilBrush extends Brush {
 
-    OilBrush() {
+    public OilBrush() {
         textureFile = "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\textures\\brush.png";
         shape = new Circle(5);
         opacity = 0.6;

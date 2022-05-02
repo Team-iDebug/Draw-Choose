@@ -10,7 +10,11 @@ import javafx.scene.paint.Color;
 
 import java.util.Stack;
 
-class Fill extends Tool {
+public class Fill extends Tool {
+
+    public Fill() {
+
+    }
 
     public static void doFill(GraphicsContext context, double x, double y, Color color) {
         WritableImage snap = context.getCanvas().snapshot(null,null);
@@ -57,6 +61,8 @@ class Fill extends Tool {
 
     @Override
     public void listenMouseEvent(MouseEvent e) {
-        DrawManager.getInstance().updateAndOperate(e.getX(),e.getY());
+        if (e.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
+            DrawManager.getInstance().updateAndOperate(e.getX(),e.getY());
+        }
     }
 }

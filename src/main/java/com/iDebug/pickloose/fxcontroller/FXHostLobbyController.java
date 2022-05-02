@@ -115,7 +115,5 @@ public class FXHostLobbyController {
         LobbyManager.getInstance().setContainer(FXPlayerContainer);
         setupGameSettings();
         setupHelperFunc();
-        // getting already joined members
-        NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.GET_ALL_MEMBER);
     }
 }

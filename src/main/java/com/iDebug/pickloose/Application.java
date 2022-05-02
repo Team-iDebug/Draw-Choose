@@ -12,7 +12,7 @@ public class Application extends javafx.application.Application {
             // stop all threads
         });
         WindowManager.getInstance().setStage(stage);
-        WindowManager.getInstance().setScene(SCENES.HOMEPAGE);
+        WindowManager.getInstance().setScene(SCENES.GAME);
         stage.show();
     }
 

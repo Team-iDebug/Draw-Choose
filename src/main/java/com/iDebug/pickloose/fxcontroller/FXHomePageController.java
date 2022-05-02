@@ -114,6 +114,7 @@ public class FXHomePageController {
     public void initialize() {
         // setting random client id for database
         ClientDatabase.setUrl(String.valueOf(Math.round(Math.random()*10000)));
+
         ImageView avatars[] = {
                 avatar1,avatar2,avatar3,avatar4,avatar5,avatar6,avatar7,avatar8
         };

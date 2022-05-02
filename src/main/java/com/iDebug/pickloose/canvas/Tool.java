@@ -10,7 +10,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Shape;
 
 
-abstract class Tool {
+public abstract class Tool {
     public abstract void operate();
     public abstract void listenMouseEvent(MouseEvent e);
 
@@ -25,6 +25,11 @@ abstract class Tool {
         Image textureImage = ColorController.reColor(new Image(texture),from, to);
         shape.setOpacity(opacity);
         shape.setFill(new ImagePattern(textureImage));
+        return createImage(shape);
+    }
+
+    public static Image createTexture(Shape shape, Color color) {
+        shape.setFill(color);
         return createImage(shape);
     }
 

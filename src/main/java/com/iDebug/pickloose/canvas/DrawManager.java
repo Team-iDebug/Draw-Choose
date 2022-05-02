@@ -40,9 +40,9 @@ public class DrawManager {
 
     public void updateAndOperate(double x, double y) {
         updateMouseLocation(x,y);
-        canvas.updateSnap();
-        NetworkManager.getInstance().sendStream(x + " " + y);
+//        NetworkManager.getInstance().sendStream(x + " " + y);
         selectedTool.operate();
+        canvas.updateSnap();
     }
 
     public void updateMouseLocation(double x, double y) {
@@ -102,6 +102,10 @@ public class DrawManager {
 
     public void redo() {
         canvas.redo();
+    }
+
+    public void clearCanvas() {
+        canvas.clear();
     }
 
     public void listenMouseEvent(MouseEvent e) {

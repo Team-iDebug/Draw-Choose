@@ -22,7 +22,7 @@
             <children>
                 <VBox spacing="3.0" styleClass="button-container" stylesheets="@../../css/game.css">
                     <children>
-                        <HBox alignment="CENTER" prefHeight="35.0" styleClass="button-box" VBox.vgrow="ALWAYS">
+                        <HBox fx:id="FXPencil" alignment="CENTER" prefHeight="35.0" styleClass="button-box" VBox.vgrow="ALWAYS">
                             <children>
                                 <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -37,7 +37,7 @@
                                 <Insets />
                             </VBox.margin>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                        <HBox fx:id="FXBrush" alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
                             <children>
                                 <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -46,7 +46,7 @@
                                 </ImageView>
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                        <HBox fx:id="FXEraser" alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
                             <children>
                                 <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -55,7 +55,7 @@
                                 </ImageView>
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                        <HBox fx:id="FXSpray" alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
                             <children>
                                 <ImageView fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -64,7 +64,7 @@
                                 </ImageView>
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                        <HBox fx:id="FXFill" alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
                             <children>
                                 <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -73,7 +73,7 @@
                                 </ImageView>
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
+                        <HBox fx:id="FXClearCanvas" alignment="CENTER" prefHeight="30.0" styleClass="button-box" stylesheets="@../../css/game.css">
                             <children>
                                 <ImageView fitHeight="24.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                     <image>

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class UserManager {
     private static UserManager userManager;
+    private AuthUser myUser;
     private UserManager() {
 
     }
@@ -84,5 +85,13 @@ public class UserManager {
         resultSet.close();
         ClientDatabase.getInstance().closeConnection();
         return result;
+    }
+
+    public AuthUser getMyUser() {
+        return myUser;
+    }
+
+    public void setMyUser(AuthUser myUser) {
+        this.myUser = myUser;
     }
 }
