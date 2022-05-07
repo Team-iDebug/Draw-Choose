@@ -4,9 +4,11 @@ import com.iDebug.pickloose.NetworkManager;
 import com.iDebug.pickloose.canvas.*;
 import com.iDebug.pickloose.network.SERVICE;
 import javafx.fxml.FXML;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 import java.util.HashMap;
 
@@ -31,7 +33,7 @@ public class FXCanvasController {
     @FXML
     private HBox FXClearCanvas;
     @FXML
-    private HBox FXColorPallete;
+    private ColorPicker FXColorPicker;
 
     private void networkRequest() {
         try {
@@ -60,14 +62,21 @@ public class FXCanvasController {
         toolEnum.put(FXFill,TOOLS.FILL);
 
         for(var tool : tools) {
-            tool.setOnMouseClicked(e -> {
+            tool.setOnMousePressed(e -> {
                 DrawManager.getInstance().setSelectedTool(toolMap.get(tool));
                 NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.SET_TOOL,toolEnum.get(tool).toString());
             });
         }
 
-        FXClearCanvas.setOnMouseClicked(e -> {
+        FXClearCanvas.setOnMousePressed(e -> {
             DrawManager.getInstance().clearCanvas();
+            NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.CLEAR_CANVAS);
+        });
+
+        FXColorPicker.setOnAction(e -> {
+            Color color = FXColorPicker.getValue();
+            DrawManager.getInstance().setSelectedColor(color);
+            NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.SET_COLOR,color.toString());
         });
     }
 

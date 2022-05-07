@@ -8,11 +8,9 @@ import com.iDebug.pickloose.network.SERVICE;
 import java.io.IOException;
 import java.net.Socket;
 
-public class UpdateCanvasDispather extends Dispatcher {
-
+public class ClearCanvasDispatcher extends Dispatcher {
     @Override
     void dispatch(Request request, Socket socket) throws IOException {
-        Response response = new Response(request.getService(), FEEDBACK.SUCCEED,request.getBody());
-        broadcastExcludeRespond(response,socket);
+        broadcastExcludeRespond(new Response(SERVICE.CLEAR_CANVAS, FEEDBACK.SUCCEED),socket);
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -93,23 +94,9 @@
         </VBox>
     </left>
     <right>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="35.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="35.0" spacing="5.0" BorderPane.alignment="CENTER">
             <children>
-                <VBox prefWidth="100.0" styleClass="button-container" stylesheets="@../../css/game.css">
-                    <children>
-                        <HBox fx:id="FXColorPallete" alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../../widgets/color-wheel.png" />
-                                    </image>
-                                </ImageView>
-                            </children>
-                        </HBox>
-                    </children>
-                    <padding>
-                        <Insets bottom="2.0" top="2.0" />
-                    </padding></VBox>
+            <ColorPicker fx:id="FXColorPicker" />
             </children>
             <BorderPane.margin>
                 <Insets left="4.0" right="4.0" />

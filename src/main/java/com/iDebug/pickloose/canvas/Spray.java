@@ -28,7 +28,8 @@ public class Spray extends Tool {
         for(int i = 0 ; i < 30 ; i++) {
             int currX = (int) Math.floor(Math.random()*(maxX-minX+1)+minX);
             int currY = (int) Math.floor(Math.random()*(maxY-minY+1)+minY);
-            pixelWriter.setColor(currX,currY, Color.GREEN);
+            Color selectedColor = DrawManager.getInstance().getSelectedColor();
+            pixelWriter.setColor(currX,currY,selectedColor);
         }
     }
 

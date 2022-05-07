@@ -19,7 +19,7 @@ public class DrawManager {
     private GraphicsContext graphicsContext;
 
     private DrawManager() {
-        selectedTool = new OilBrush();
+        selectedColor = Color.YELLOW;
         mouseLocation = new Point2D(0,0);
         prevMouseLocation = new Point2D(0,0);
     }
@@ -125,6 +125,7 @@ public class DrawManager {
     }
 
     public void listenMouseEvent(MouseEvent e) {
-        selectedTool.listenMouseEvent(e);
+        if(selectedTool != null)
+            selectedTool.listenMouseEvent(e);
     }
 }

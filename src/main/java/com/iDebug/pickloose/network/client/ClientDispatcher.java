@@ -40,17 +40,20 @@ public class ClientDispatcher extends Dispatcher {
                     case NEW_MESSAGE -> Platform.runLater(() -> {
                         new NewMessageDispatcher().dispatch(response);
                     });
-                    case UPDATE_CANVAS -> Platform.runLater(() -> {
-                        new UpdateCanvasDispatcher().dispatch(response);
-                    });
                     case GET_CANVAS_SOCKET -> Platform.runLater(() -> {
                         new CanvasSocketDispatcher().dispatch(response);
+                    });
+                    case CLEAR_CANVAS -> Platform.runLater(() -> {
+                        new ClearCanvasDispatcher().dispatch(response);
                     });
                     case GET_ALL_MEMBER -> Platform.runLater(() -> {
                         new GetAllMemberDispatcher().dispatch(response);
                     });
                     case SET_TOOL -> Platform.runLater(() -> {
                         new SetToolDispatcher().dispatch(response);
+                    });
+                    case SET_COLOR -> Platform.runLater(() -> {
+                        new SetColorDispatcher().dispatch(response);
                     });
                 }
             }

@@ -29,8 +29,9 @@ public abstract class Tool {
         return createImage(shape);
     }
 
-    public static Image createTexture(Shape shape, Color color) {
+    public static Image createTexture(Shape shape, Color color, double opacity) {
         shape.setFill(color);
+        shape.setOpacity(opacity);
         return createImage(shape);
     }
 

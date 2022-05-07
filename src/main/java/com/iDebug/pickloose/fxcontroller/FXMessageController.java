@@ -1,15 +1,14 @@
 package com.iDebug.pickloose.fxcontroller;
 
-import com.iDebug.pickloose.MSG_STATUS;
-import com.iDebug.pickloose.Message;
-import com.iDebug.pickloose.OBSERVER;
-import com.iDebug.pickloose.NetworkManager;
+import com.iDebug.pickloose.*;
 import com.iDebug.pickloose.network.SERVICE;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -35,6 +34,9 @@ public class FXMessageController {
     private ScrollPane scrollPane;
     private static ScrollPane fxmlScrollPane;
 
+    @FXML
+    private HBox FXGif1,FXGif2,FXGif3,FXGif4,FXGif5;
+
     public static void guiNewMsg(Message message, OBSERVER observer) {
         if(observer == OBSERVER.SENDER)
             send(fxmlMsgContainer,message);
@@ -47,7 +49,14 @@ public class FXMessageController {
     private void sendNewMessage() {
         String msgText = msgTextField.getText();
         Message msg = new Message(NetworkManager.getInstance().getUser().getUsername(),
-                LocalTime.now().toString(),msgText, MSG_STATUS.SENT);
+                LocalTime.now().toString(), MSG_TYPE.PLAIN_TEXT, msgText, MSG_STATUS.SENT);
+        guiNewMsg(msg,OBSERVER.SENDER);
+        NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.NEW_MESSAGE,Message.deSerialize(msg));
+    }
+
+    private void sendNewGif(String gif) {
+        Message msg = new Message(NetworkManager.getInstance().getUser().getUsername(),
+                LocalTime.now().toString(), MSG_TYPE.GIF, gif, MSG_STATUS.SENT);
         guiNewMsg(msg,OBSERVER.SENDER);
         NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.NEW_MESSAGE,Message.deSerialize(msg));
     }
@@ -69,22 +78,44 @@ public class FXMessageController {
                 sendNewMessage();
             }
         } );
+
+        HBox[] gifs = {FXGif1,FXGif2,FXGif3,FXGif4,FXGif5};
+        for (var gif : gifs) {
+            gif.setOnMousePressed(e -> {
+                sendNewGif(gif.getId());
+            });
+        }
     }
 
     private static VBox getGuiMessageBox(Message message) throws NullPointerException {
         VBox msgBox = new VBox();
-        msgBox.getStyleClass().add("message-box-test");
+        if(message.getType() == MSG_TYPE.PLAIN_TEXT)
+            msgBox.getStyleClass().add("message-box-dark");
+        else if(message.getType() == MSG_TYPE.GIF)
+            msgBox.getStyleClass().add("message-box-light");
 
         HBox senderBox = new HBox();
         Label sender = new Label(message.getUserid());
-        sender.getStyleClass().add("message-sender");
+        if(message.getType() == MSG_TYPE.PLAIN_TEXT)
+            sender.getStyleClass().add("message-sender-dark");
+        else if(message.getType() == MSG_TYPE.GIF)
+            sender.getStyleClass().add("message-sender-light");
         senderBox.getChildren().add(sender);
 
-        HBox textBox = new HBox();
-        Label text = new Label(message.getText());
-        text.setWrapText(true);
-        text.getStyleClass().add("message-text");
-        textBox.getChildren().add(text);
+        HBox contentBox = new HBox();
+        if(message.getType() == MSG_TYPE.PLAIN_TEXT) {
+            Label text = new Label(message.getText());
+            text.setWrapText(true);
+            text.getStyleClass().add("message-text");
+            contentBox.getChildren().add(text);
+        }
+        else if(message.getType() == MSG_TYPE.GIF) {
+            ImageView image = new ImageView();
+            image.setImage(new Image(GifFactory.getInstance().getGif(message.getText())));
+            image.setFitWidth(150);
+            image.setFitHeight(150);
+            contentBox.getChildren().add(image);
+        }
 
         HBox infoBox = new HBox();
         HBox timeBox = new HBox();
@@ -104,7 +135,7 @@ public class FXMessageController {
         infoBox.getChildren().add(timeBox);
 
         msgBox.getChildren().add(senderBox);
-        msgBox.getChildren().add(textBox);
+        msgBox.getChildren().add(contentBox);
         msgBox.getChildren().add(infoBox);
 
         return msgBox;

@@ -7,7 +7,7 @@ import javafx.scene.shape.Circle;
 public class Eraser extends Brush {
     public Eraser() {
         shape = new Circle(5);
-        texture = createTexture(shape,Color.WHITE);
+        texture = createTexture(shape,Color.WHITE,1.0);
     }
 
     @Override

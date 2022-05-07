@@ -14,11 +14,14 @@ public class Message {
     @Expose
     private String text;
     @Expose
+    private MSG_TYPE type;
+    @Expose
     private MSG_STATUS status;
 
-    public Message(String userid, String time, String text, MSG_STATUS status) {
+    public Message(String userid, String time, MSG_TYPE msg_type, String text, MSG_STATUS status) {
         this.userid = userid;
         this.time = time;
+        this.type = msg_type;
         this.text = text;
         this.status = status;
     }
@@ -47,13 +50,7 @@ public class Message {
         return status;
     }
 
-    public static void main(String[] args) {
-        Message msg = new Message("nayem", LocalTime.now().toString(),"hello world", MSG_STATUS.RECEIVED);
-        String s = Message.deSerialize(msg);
-        System.out.println(s);
-        Message msg1 = Message.serialize(s);
-
-//        String t = "{\"userid\":\"nayem\",\"text\":\"hello world\",\"status\":\"RECEIVED\"}";
-//        System.out.println(Message.serialize(t).time);
+    public MSG_TYPE getType() {
+        return type;
     }
 }

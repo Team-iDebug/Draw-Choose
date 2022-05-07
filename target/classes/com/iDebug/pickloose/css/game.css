@@ -1,5 +1,6 @@
 * {
     -fx-grey: #D0D0D0;
+    -fx-dark-grey: 	#A9A9A9;
     -fx-light-grey: #F1F1F1;
     -fx-green: #07BB4F;
     -fx-dark-green: #075E54;
@@ -107,6 +108,14 @@
     -fx-background-radius: 10 10 10 10;
 }
 
+.color-picker {
+    -fx-background-color: -fx-white;
+    -fx-min-height: 30;
+    -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 1.0, 0.0, 2.0, 1.0);
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
 .green-button-container {
     -fx-background-color: -fx-light-green;
     -fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 1.0, 0.0, 2.0, 1.0);
@@ -164,15 +173,18 @@
 }
 
 .message-box-received-container {
-    -fx-padding: 0 35 0 0;
-    -fx-border-insets: 0 35 0 0;
-    -fx-background-insets: 0 35 0 0;
     -fx-alignment: center-left;
 }
 
-.message-sender {
+.message-sender-dark {
     -fx-font-size: 12px;
     -fx-text-fill: #00FF66;
+    -fx-font-weight: 700;
+}
+
+.message-sender-light {
+    -fx-font-size: 12px;
+    -fx-text-fill: -fx-dark-grey;
     -fx-font-weight: 700;
 }
 
@@ -182,17 +194,25 @@
     -fx-font-weight: 700;
 }
 
+.gif-container {
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-padding: 2 2 2 2;
+    -fx-background-color: -fx-white;
+}
+
 .message-info {
     -fx-font-size: 10px;
     -fx-text-fill: -fx-grey;
     -fx-font-weight: 100;
 }
 
-.message-box {
-    -fx-background-color: -fx-dark-green;
-    -fx-border-radius: 10 10 10 10;
-    -fx-background-radius: 10 10 10 10;
-    -fx-padding: 10 10 10 10;
+.message-box-light {
+    -fx-min-width: 100;
+    -fx-background-color: -fx-white;
+    -fx-border-radius: 5 5 5 5;
+    -fx-background-radius: 5 5 5 5;
+    -fx-padding: 5 5 5 5;
     -fx-font-size: 12px;
     -fx-text-fill: -fx-white;
     -fx-font-weight: 500;
@@ -200,7 +220,7 @@
     -fx-alignment: center;
 }
 
-.message-box-test {
+.message-box-dark {
     -fx-min-width: 100;
     -fx-background-color: -fx-dark-green;
     -fx-border-radius: 5 5 5 5;

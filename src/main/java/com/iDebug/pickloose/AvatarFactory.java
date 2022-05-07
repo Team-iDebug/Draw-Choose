@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class AvatarFactory {
     final private static String location = "src/main/resources/com/iDebug/pickloose/avatar/avatar.json";
-    private static AvatarFactory avatarFactory;
+    private static AvatarFactory gifFactory;
     private JsonObject avatars;
 
     private AvatarFactory() {
@@ -17,9 +17,9 @@ public class AvatarFactory {
     }
 
     public static AvatarFactory getInstance() {
-        if(avatarFactory == null)
-            avatarFactory = new AvatarFactory();
-        return avatarFactory;
+        if(gifFactory == null)
+            gifFactory = new AvatarFactory();
+        return gifFactory;
     }
 
     private void load () {
@@ -35,7 +35,6 @@ public class AvatarFactory {
             e.printStackTrace();
         }
         avatars = new Gson().fromJson(buffer.toString(),JsonObject.class);
-        System.out.println("loaded");
     }
 
     public String getAvatar(String code) {

@@ -56,7 +56,8 @@ public class Fill extends Tool {
         Point2D location = DrawManager.getInstance().getMouseLocation();
         double x = location.getX();
         double y = location.getY();
-        doFill(DrawManager.getInstance().getGraphicsContext(),x,y,ColorController.getColor());
+        Color color = DrawManager.getInstance().getSelectedColor();
+        doFill(DrawManager.getInstance().getGraphicsContext(),x,y,color);
     }
 
     @Override

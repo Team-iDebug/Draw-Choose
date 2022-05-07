@@ -42,9 +42,8 @@ class CanvasStreamListener extends Listener {
                 try {
                     String toolAction = in.readLine();
                     broadCastStream(toolAction,socket);
-//                    System.out.println(toolAction);
                 } catch (IOException e) {
-                    e.printStackTrace();
+//                    e.printStackTrace();
                     alive = false;
                 }
             }

@@ -11,6 +11,7 @@ abstract class Brush extends Tool {
     protected double opacity;
     protected Shape shape;
     protected Image texture;
+    protected Color color;
 
     @Override
     public void listenEvent(int x, int y, String event) {
