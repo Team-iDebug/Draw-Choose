@@ -6,7 +6,7 @@ import javafx.scene.shape.Circle;
 
 public class OilBrush extends Brush {
     public OilBrush() {
-        textureFile = "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\textures\\brush.png";
+        textureFile = "file:../src/main/resources/com/iDebug/pickloose/textures/brush.png";
         shape = new Circle(5);
         opacity = 0.2;
         color = DrawManager.getInstance().getSelectedColor();

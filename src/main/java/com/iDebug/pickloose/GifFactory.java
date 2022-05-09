@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class GifFactory {
-    final private static String location = "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\gifs.json";
+    final private static String location = "src/main/resources/com/iDebug/pickloose/gifs/gifs.json";
     private static GifFactory gifFactory;
     private JsonObject gifs;
 

@@ -24,6 +24,7 @@ public class AvatarFactory {
 
     private void load () {
         StringBuffer buffer = new StringBuffer();
+        System.getProperty("user.dir");
         try {
             File f = new File(location);
             Scanner scanner = new Scanner(f);

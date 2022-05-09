@@ -13,7 +13,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.PopupWindow;
+import javafx.util.Duration;
+import org.controlsfx.control.PopOver;
 
+import javax.xml.stream.Location;
 import java.time.LocalTime;
 
 public class FXMessageController {
@@ -36,6 +40,15 @@ public class FXMessageController {
 
     @FXML
     private HBox FXGif1,FXGif2,FXGif3,FXGif4,FXGif5;
+
+    final static String reacts[] = {
+            "src/main/resources/com/iDebug/pickloose/reacts/fire.png",
+            "src/main/resources/com/iDebug/pickloose/reacts/confetti.png",
+            "src/main/resources/com/iDebug/pickloose/reacts/cool.png",
+            "src/main/resources/com/iDebug/pickloose/reacts/dead.png",
+            "src/main/resources/com/iDebug/pickloose/reacts/donkey.png",
+            "src/main/resources/com/iDebug/pickloose/reacts/poop.png"
+    };
 
     public static void guiNewMsg(Message message, OBSERVER observer) {
         if(observer == OBSERVER.SENDER)
@@ -111,7 +124,7 @@ public class FXMessageController {
         }
         else if(message.getType() == MSG_TYPE.GIF) {
             ImageView image = new ImageView();
-            image.setImage(new Image(GifFactory.getInstance().getGif(message.getText())));
+            image.setImage(new Image("file:"+GifFactory.getInstance().getGif(message.getText())));
             image.setFitWidth(150);
             image.setFitHeight(150);
             contentBox.getChildren().add(image);
@@ -137,6 +150,39 @@ public class FXMessageController {
         msgBox.getChildren().add(senderBox);
         msgBox.getChildren().add(contentBox);
         msgBox.getChildren().add(infoBox);
+
+        HBox reactionBox = new HBox();
+        reactionBox.setAlignment(Pos.CENTER);
+        reactionBox.setSpacing(5);
+        reactionBox.setPrefHeight(18);
+        reactionBox.setStyle("-fx-border-radius: 15 15 15 15;" +
+                "-fx-background-radius: 15 15 15 15;" +
+                "-fx-effect: dropshadow(gaussian, rgba(183, 183, 183, 0.25), 0.0, 0.0, 2.0, 1.0);" +
+                "-fx-padding: 5 5 5 5;");
+
+        for (var react : reacts) {
+            ImageView imageView = new ImageView();
+            imageView.setImage(new Image("file:"+react));
+            reactionBox.getChildren().add(imageView);
+            imageView.setFitHeight(16);
+            imageView.setFitWidth(16);
+        }
+
+        PopOver popOver = new PopOver(reactionBox);
+        popOver.setAnimated(true);
+        popOver.setFadeInDuration(new Duration(0.2));
+        popOver.setFadeOutDuration(new Duration(0.2));
+        popOver.setArrowSize(0);
+        popOver.setCornerRadius(15);
+
+        msgBox.setOnMousePressed(e -> {
+            popOver.setAnchorX(e.getX());
+            popOver.setAnchorY(e.getY());
+            popOver.show(msgBox);
+        });
+        msgBox.setOnMouseReleased(e -> {
+//            popOver.hide();
+        });
 
         return msgBox;
     }

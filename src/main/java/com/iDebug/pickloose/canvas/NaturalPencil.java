@@ -6,7 +6,7 @@ import javafx.scene.shape.Circle;
 
 public class NaturalPencil extends Brush {
     public NaturalPencil() {
-        textureFile = "D:\\softwareDev\\canvas2\\src\\main\\resources\\com\\example\\canvas2\\watercolor.png";
+        textureFile = "file:../src/main/resources/com/iDebug/pickloose/textures/waterColor.png";
         shape = new Circle(1);
         opacity = 1.0;
         color = DrawManager.getInstance().getSelectedColor();

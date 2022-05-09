@@ -1,22 +1,22 @@
 {
   "FXGif1" : {
     "thumbnail" : "",
-    "gif" : "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\oh-no.gif"
+    "gif" : "src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\oh-no.gif"
   },
   "FXGif2" : {
     "thumbnail" : "",
-    "gif" : "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\boss.gif"
+    "gif" : "src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\boss.gif"
   },
   "FXGif3" : {
     "thumbnail" : "",
-    "gif" : "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\help.gif"
+    "gif" : "src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\help.gif"
   },
   "FXGif4" : {
     "thumbnail" : "",
-    "gif" : "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\omg.gif"
+    "gif" : "src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\omg.gif"
   },
   "FXGif5" : {
     "thumbnail" : "",
-    "gif" : "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\waiting.gif"
+    "gif" : "src\\main\\resources\\com\\iDebug\\pickloose\\gifs\\waiting.gif"
   }
 }

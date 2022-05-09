@@ -24,7 +24,7 @@ public class GameManager {
             ImageView avatarImage = new ImageView();
             avatarImage.setFitHeight(35);
             avatarImage.setFitWidth(38);
-            avatarImage.setImage(new Image(authUser.getAvatarSrc()));
+            avatarImage.setImage(new Image("file:"+authUser.getAvatarSrc()));
             playerAvatar.getChildren().add(avatarImage);
 
             HBox playerInfo = new HBox();
