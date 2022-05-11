@@ -55,7 +55,7 @@ public class GameManager {
             ImageView status = new ImageView();
             status.setFitHeight(12);
             status.setFitWidth(12);
-            status.setImage(new Image("D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\widgets\\yellow-brush.png"));
+            status.setImage(new Image("file:src\\main\\resources\\com\\iDebug\\pickloose\\widgets\\yellow-brush.png"));
             hBox.getChildren().add(status);
             playerStatus.getChildren().add(hBox);
 
