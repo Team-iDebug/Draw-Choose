@@ -14,6 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -158,9 +161,14 @@ public class FXHomePageController {
                 GameManager.getInstance().setUserMode(USER_MODE.HOST);
                 Server server = new Server(0, GameServerListener.class);
                 server.start();
-                String serverIP = server.getSocket().getInetAddress().getHostAddress();
+//                String serverIP = server.getSocket().getInetAddress().getHostAddress();
                 int port = server.getSocket().getLocalPort();
-                new Thread(()-> sendJoinGameRequest(serverIP,port)).start();
+                try {
+                    String serverIP = InetAddress.getLocalHost().getHostAddress();
+                    new Thread(()-> sendJoinGameRequest(serverIP,port)).start();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
                 Platform.runLater(() -> {
                     NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.MAKE_HOST);
                 });

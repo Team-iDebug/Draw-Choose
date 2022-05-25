@@ -82,7 +82,7 @@ public class UserManager {
     public boolean isHost(String userid) throws SQLException {
         ResultSet resultSet = ClientDatabase.getInstance().isHost(userid);
         boolean result = (resultSet.getString(1) != null && resultSet.getString(1).equals("HOST"));
-        resultSet.close();
+//        resultSet.close();
         ClientDatabase.getInstance().closeConnection();
         return result;
     }
