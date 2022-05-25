@@ -750,8 +750,8 @@
                            <children>
                               <HBox alignment="CENTER" prefWidth="70.0" spacing="5.0" styleClass="online-status" stylesheets="@../css/iDebug.css">
                                  <children>
-                                    <Circle fill="#075e54" radius="3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-                                    <Label text="Online" textFill="#075e54" />
+                                    <Circle fill="#07bb4f" radius="3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                                    <Label text="Online" textFill="#07bb4f" />
                                  </children>
                               </HBox>
                            </children>
@@ -761,7 +761,27 @@
                   <Pane prefHeight="200.0" VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="85.0" styleClass="green-button-container" stylesheets="@../css/iDebug.css" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="70.0" styleClass="green-button-container" stylesheets="@../css/iDebug.css">
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../widgets/undo.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../widgets/redo.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children></HBox>
                      </children>
                      <VBox.margin>
                         <Insets />
