@@ -64,6 +64,7 @@ public class FXHostLobbyController {
 
         GameSettings gameSettings = new GameSettings(FXRounds.getValue(),FXRoundDuration.getValue(),
                 FXDifficulty.getValue(),FXMaxGuess.getValue());
+        GameManager.getInstance().setGameSettings(gameSettings);
         String serializedGameSettings = new Gson().toJson(gameSettings);
         NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.SET_GAME_SETTINGS, serializedGameSettings);
 
@@ -79,6 +80,7 @@ public class FXHostLobbyController {
 
                     GameSettings newGameSettings = new GameSettings(newRoundVal,newRoundDurationVal,
                             newDiffVal,newGuessVal);
+                    GameManager.getInstance().setGameSettings(newGameSettings);
                     String newSerializedGameSettings = new Gson().toJson(newGameSettings);
                     NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.SET_GAME_SETTINGS, newSerializedGameSettings);
 

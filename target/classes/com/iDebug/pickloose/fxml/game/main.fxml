@@ -2,20 +2,20 @@
 
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="root" stylesheets="@../../css/game.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" styleClass="root" stylesheets="@../../css/game.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iDebug.pickloose.fxcontroller.FXGameController">
     <top>
-        <fx:include source="top.fxml"/>
+        <fx:include source="top.fxml" />
     </top>
     <bottom>
-        <fx:include source="bottom.fxml"/>
+        <fx:include source="bottom.fxml" />
     </bottom>
     <left>
-        <fx:include source="left.fxml"/>
+        <fx:include source="left.fxml" />
     </left>
     <right>
-        <fx:include source="right.fxml"/>
+        <fx:include source="right.fxml" />
     </right>
     <center>
-        <fx:include source="center.fxml"/>
+        <fx:include source="center.fxml" />
     </center>
 </BorderPane>

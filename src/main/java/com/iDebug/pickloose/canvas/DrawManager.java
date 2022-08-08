@@ -19,7 +19,7 @@ public class DrawManager {
     private GraphicsContext graphicsContext;
 
     private DrawManager() {
-        selectedColor = Color.YELLOW;
+        selectedColor = Color.rgb(26,77,77);
         mouseLocation = new Point2D(0,0);
         prevMouseLocation = new Point2D(0,0);
     }

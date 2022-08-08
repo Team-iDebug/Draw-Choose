@@ -115,7 +115,7 @@
                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                     </padding>
                                     <children>
-                                        <Label styleClass="bold-white-font" stylesheets="@../../css/game.css" text="0:12" textFill="#ee1b1b" />
+                                        <Label fx:id="FXTimer" styleClass="bold-white-font" stylesheets="@../../css/game.css" text="0:12" textFill="#ee1b1b" />
                                     </children>
                                 </HBox>
                             </children>
