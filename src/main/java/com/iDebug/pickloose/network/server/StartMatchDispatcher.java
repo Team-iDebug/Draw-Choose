@@ -19,10 +19,12 @@ public class StartMatchDispatcher extends Dispatcher {
         Socket playerSocket = Manager.getInstance().getSocket(player.getUserid());
 
         JsonObject drawResponse = new JsonObject();
+        drawResponse.addProperty("player",player.getUsername());
         drawResponse.addProperty("mode","draw");
         drawResponse.addProperty("word", word);
 
         JsonObject guessResponse = new JsonObject();
+        guessResponse.addProperty("player",player.getUsername());
         guessResponse.addProperty("mode","guess");
         guessResponse.addProperty("length",String.valueOf(word.length()));
 

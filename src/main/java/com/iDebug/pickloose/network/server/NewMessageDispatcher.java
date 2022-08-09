@@ -29,8 +29,8 @@ class NewMessageDispatcher extends Dispatcher {
                 try {
                     prevPoints = Manager.getInstance().getPoints(userId);
                     // todo : point system
-                    int timeLeft = ServerTimer.getTime();
                     int duration = Integer.parseInt(GameManager.getInstance().getGameSettings().getRoundDuration());
+                    int timeLeft = duration - ServerTimer.getTime();
                     newPoints = (int) ((double)(duration*10.0)/(double)timeLeft);
                     points = prevPoints + newPoints;
                     ServerDatabase.getInstance().updatePoints(request.getAuthSender().getUserid(),points);
