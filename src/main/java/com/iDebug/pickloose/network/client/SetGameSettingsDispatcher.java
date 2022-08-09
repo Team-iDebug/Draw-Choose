@@ -13,6 +13,7 @@ class SetGameSettingsDispatcher extends Dispatcher {
         try {
             GameSettings gameSettings = new Gson().fromJson(response.getBody(),GameSettings.class);
             LobbyManager.getInstance().setGuiGameSettings(gameSettings);
+            GameManager.getInstance().setGameSettings(gameSettings);
         }
         catch (NullPointerException e) {
 

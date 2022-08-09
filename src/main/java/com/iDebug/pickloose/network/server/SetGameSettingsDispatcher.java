@@ -1,6 +1,7 @@
 package com.iDebug.pickloose.network.server;
 
 import com.google.gson.Gson;
+import com.iDebug.pickloose.GameManager;
 import com.iDebug.pickloose.GameSettings;
 import com.iDebug.pickloose.network.FEEDBACK;
 import com.iDebug.pickloose.network.Request;

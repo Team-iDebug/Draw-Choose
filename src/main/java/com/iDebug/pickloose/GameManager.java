@@ -1,6 +1,7 @@
 package com.iDebug.pickloose;
 
-import javafx.application.Platform;
+import com.google.gson.JsonObject;
+import com.iDebug.pickloose.network.SERVICE;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -19,11 +20,24 @@ public class GameManager {
     private VBox playerContainer;
     private GameSettings gameSettings;
     private Label guiTimer;
-    private boolean selected;
-    private int totalValidSubmission;
+    private String currentPainter;
+    private String selectedWord;
+    private Set<String> validGuesses;
+
+    public String getCurrentPainter() {
+        return currentPainter;
+    }
+
+    // todo : use database for words
+    String[] words = { "Angel", "Eyeball", "Pizza", "Angry", "Fireworks", "Pumpkin", "Baby", "Flower", "Rainbow",
+            "Beard","Recycle","Bible","Giraffe","Castle", "Glasses","Snowflake","Book","Heel","Stairs",
+            "Bucket","Cream","Starfish","bee","Igloo","Strawberry", "Butterfly","Lady","Sun","Camera","Lamp",
+            "Tire", "Cat","Lion","Toast","Church","Mailbox","Toothbrush","Crayon","Night","Toothpaste",
+            "Dolphin","Nose","Truck", "Egg","Olympics","Volleyball","Tower","Peanut"};
 
     private GameManager() {
         useridGUIMapping = new HashMap<>();
+        validGuesses = new HashSet<>();
     }
 
     public static GameManager getInstance() {
@@ -65,108 +79,68 @@ public class GameManager {
         this.gameSettings = gameSettings;
     }
 
-    private void resetPlayerSession() {
-        totalValidSubmission = 0;
-        selected = false;
-    }
-
-    public void startGame() throws SQLException, InterruptedException {
-//        int rounds = Integer.parseInt(gameSettings.getRounds());
-//        int duration = Integer.parseInt(gameSettings.getRoundDuration());
-//        var players = UserManager.getInstance().getPlayers();
-
-        // fake data
-        int rounds = 3;
-        int duration = 10;
-        ArrayList<AuthUser> players = new ArrayList<>();
-        players.add(new AuthUser("Nayem", ""));
-        players.add(new AuthUser("Islam", ""));
-        players.add(new AuthUser("Zr", ""));
+    public void startGame() throws SQLException, InterruptedException { // only host should use this function
+        int rounds = Integer.parseInt(gameSettings.getRounds());
+        int duration = Integer.parseInt(gameSettings.getRoundDuration());
+        var players = UserManager.getInstance().getPlayers();
         Collections.shuffle(players);
 
         for (int i = 0; i < rounds; i++) {
             for (int j = 0; j < players.size(); j++) {
-                System.out.println(players.get(j).getUsername() + " is ready to select");
-                resetPlayerSession();
-                Timer selectionTimer = new SelectionTimer(10);
-                selectionTimer.start();
-                selectionTimer.join();
-                System.out.println("Players ready to guess");
-                Timer submissionTimer = new SubmissionTimer(duration);
-                submissionTimer.start();
-                submissionTimer.join();
+                // play
+                AuthUser player = players.get(j);
+                currentPainter = player.getUserid();
+                selectedWord = words[(int) (Math.random() * (words.length))];
+                JsonObject msg = new JsonObject();
+                msg.addProperty("player",AuthUser.deserialize(player));
+                msg.addProperty("word",selectedWord);
+                NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.PLAY_MATCH, msg.toString());
+                ServerTimer timer = new ServerTimer(duration);
+                timer.start();
+                timer.join();
+                //result
+
+                // reset
+                validGuesses.clear();
+                NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.STOP_MATCH);
             }
         }
+
     }
 
-    boolean selectionFullFilled() {
-        return selected;
+    public String getSelectedWord() {
+        return selectedWord;
     }
 
-    boolean submissionFullFilled() {
-        int totalPlayers = 0;
-        try {
-            totalPlayers = UserManager.getInstance().getPlayers().size();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return totalValidSubmission == totalPlayers - 1;
+    public void updatePlayerGUIPoints(String userId, int points) {
+        GUIPlayerCard guiPlayerCard = useridGUIMapping.get(userId);
+        guiPlayerCard.updatePoints(points);
     }
 
-    abstract class Timer extends Thread {
-        int time;
-        Timer() {
-
-        }
-        Timer (int duration) {
-            time = duration;
-        }
-        abstract boolean isRunning();
-        @Override
-        public void run() {
-            while(isRunning()) {
-                Runnable runnable = () -> {
-                    guiTimer.setText(String.valueOf(time));
-                };
-                Platform.runLater(runnable);
-                time--;
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+    public boolean hasGuessed(String userId) {
+        return validGuesses.contains(userId);
     }
 
-    class SelectionTimer extends Timer {
-        SelectionTimer(int duration) {
-            super(duration);
-        }
-        @Override
-        boolean isRunning() {
-            return (time >= 1 && !selectionFullFilled());
-        }
+    public int getValidGuessAmount() {
+        return validGuesses.size();
     }
 
-    class SubmissionTimer extends Timer {
-        SubmissionTimer(int duration) {
-            super(duration);
-        }
-        @Override
-        boolean isRunning() {
-            return (time >= 1 && !submissionFullFilled());
-        }
+    public void addGuess(String userId) {
+        validGuesses.add(userId);
     }
 
     class GUIPlayerCard {
         private final AuthUser authUser;
         private HBox playerCard;
+        Label guiPoints;
 
         GUIPlayerCard(AuthUser authUser) {
             this.authUser = authUser;
             playerContainer.getChildren().add(getGUI());
+        }
+
+        public void updatePoints(int points) {
+            guiPoints.setText(points + " Points");
         }
 
         private HBox getGUI() {
@@ -192,9 +166,9 @@ public class GameManager {
             nameContainer.getChildren().add(name);
             HBox pointsContainer = new HBox();
             pointsContainer.setAlignment(Pos.TOP_LEFT);
-            Label points = new Label("6969" + " Points");
-            points.getStyleClass().add("points");
-            pointsContainer.getChildren().add(points);
+            guiPoints = new Label("0" + " Points");
+            guiPoints.getStyleClass().add("points");
+            pointsContainer.getChildren().add(guiPoints);
             vBox.getChildren().add(nameContainer);
             vBox.getChildren().add(pointsContainer);
             playerInfo.getChildren().add(vBox);

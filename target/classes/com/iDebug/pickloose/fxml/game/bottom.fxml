@@ -1,4 +1,10 @@
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.BorderPane?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<HBox prefHeight="50.0" prefWidth="200.0" styleClass="footer" stylesheets="@../../css/game.css" BorderPane.alignment="CENTER" />
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" styleClass="footer" stylesheets="@../../css/game.css" BorderPane.alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.iDebug.pickloose.fxcontroller.FXGameWordController">
+   <children>
+      <HBox fx:id="FXWord" alignment="CENTER" spacing="5.0" HBox.hgrow="NEVER" />
+   </children>
+</HBox>

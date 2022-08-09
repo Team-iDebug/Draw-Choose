@@ -17,6 +17,11 @@ public class DrawManager {
     private Color selectedColor;
     private ResizableCanvas canvas;
     private GraphicsContext graphicsContext;
+    public enum MODE {
+        DRAW,
+        VIEW
+    };
+    private MODE mode;
 
     private DrawManager() {
         selectedColor = Color.rgb(26,77,77);
@@ -121,11 +126,24 @@ public class DrawManager {
     }
 
     public void listenEvent(int x, int y, String event) {
-        selectedTool.listenEvent(x,y,event);
+        if(isViewMode())
+            selectedTool.listenEvent(x,y,event);
+    }
+
+    private boolean isViewMode() {
+        return mode.equals(MODE.VIEW);
     }
 
     public void listenMouseEvent(MouseEvent e) {
-        if(selectedTool != null)
+        if(selectedTool != null && isDrawMode())
             selectedTool.listenMouseEvent(e);
+    }
+
+    private boolean isDrawMode() {
+        return (mode.equals(MODE.DRAW));
+    }
+
+    public void setMode(MODE mode) {
+        this.mode = mode;
     }
 }

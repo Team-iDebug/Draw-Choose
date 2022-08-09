@@ -50,6 +50,17 @@ public class FXMessageController {
             "src/main/resources/com/iDebug/pickloose/reacts/poop.png"
     };
 
+    public enum MODE {
+        TYPE,
+        VIEW
+    };
+
+    private static MODE mode;
+
+    public static void setMode(MODE mode) {
+        FXMessageController.mode = mode;
+    }
+
     public static void guiNewMsg(Message message, OBSERVER observer) {
         if(observer == OBSERVER.SENDER)
             send(fxmlMsgContainer,message);
@@ -60,6 +71,8 @@ public class FXMessageController {
     }
 
     private void sendNewMessage() {
+        if(mode.equals(MODE.VIEW))
+            return;
         String msgText = msgTextField.getText();
         Message msg = new Message(NetworkManager.getInstance().getUser().getUsername(),
                 LocalTime.now().toString(), MSG_TYPE.PLAIN_TEXT, msgText, MSG_STATUS.SENT);

@@ -1,10 +1,12 @@
 package com.iDebug.pickloose;
 
 public class GameSettings {
+    static final int selectionDuration = 10;
     private String rounds;
     private String roundDuration;
     private String difficulty;
     private String maxGuess;
+
     public GameSettings(String rounds, String roundDuration, String difficulty, String maxGuess) {
         this.rounds = rounds;
         this.roundDuration = roundDuration;
@@ -42,5 +44,9 @@ public class GameSettings {
 
     public void setMaxGuess(String maxGuess) {
         this.maxGuess = maxGuess;
+    }
+
+    public int getSelectionDuration() {
+        return selectionDuration;
     }
 }

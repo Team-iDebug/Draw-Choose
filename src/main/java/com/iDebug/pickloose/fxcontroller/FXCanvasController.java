@@ -1,9 +1,6 @@
 package com.iDebug.pickloose.fxcontroller;
 
-import com.iDebug.pickloose.GameManager;
-import com.iDebug.pickloose.GameSettings;
-import com.iDebug.pickloose.NetworkManager;
-import com.iDebug.pickloose.WindowManager;
+import com.iDebug.pickloose.*;
 import com.iDebug.pickloose.canvas.*;
 import com.iDebug.pickloose.network.SERVICE;
 import javafx.application.Platform;
@@ -18,14 +15,13 @@ import javafx.scene.paint.Color;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class FXCanvasController {
-    static Label TIMER;
+    public static Label TIMER;
     @FXML
     private Pane canvasContainer;
     @FXML
@@ -93,11 +89,14 @@ public class FXCanvasController {
         });
     }
 
+    public static Label getGuiTimer() {
+        return TIMER;
+    }
+
     @FXML
     public void initialize() {
         // static variables initialization
         TIMER = FXTimer;
-        GameManager.getInstance().setGUITimer(TIMER);
 
         networkRequest();
         setupTools();

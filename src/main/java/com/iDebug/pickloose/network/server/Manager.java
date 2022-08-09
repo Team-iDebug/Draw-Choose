@@ -51,6 +51,10 @@ class Manager {
         return useridSocketMapping;
     }
 
+    public Socket getSocket(String userid) {
+        return useridSocketMapping.get(userid);
+    }
+
     public ServerSocket getCanvasStream() {
         if(streamServerSocket == null) {
             Server server = null;
@@ -107,6 +111,14 @@ class Manager {
         resultSet.close();
         ServerDatabase.getInstance().closeConnection();
         return authUser;
+    }
+
+    public int getPoints(String user_id) throws SQLException {
+        ResultSet resultSet = ServerDatabase.getInstance().getPoints(user_id);
+        int points = resultSet.getInt(1);
+        resultSet.close();
+        ServerDatabase.getInstance().closeConnection();
+        return points;
     }
 
     public AuthUser getHost() throws SQLException {

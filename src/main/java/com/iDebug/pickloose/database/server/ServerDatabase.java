@@ -100,6 +100,12 @@ public class ServerDatabase {
         preparedStatement.execute();
         closeConnection();
     }
+    public ResultSet getPoints(String id) throws SQLException {
+        createConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT points FROM users WHERE user_id = ?");
+        preparedStatement.setString(1,id);
+        return preparedStatement.executeQuery();
+    }
     public void updatePoints(String id, int points) throws SQLException {
         createConnection();
         PreparedStatement preparedStatement = connection.prepareStatement("UPDATE users SET points = ? WHERE user_id = ?");
