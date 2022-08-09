@@ -1,5 +1,7 @@
 package com.iDebug.pickloose;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.iDebug.pickloose.animation.FadeIn;
 import com.iDebug.pickloose.network.SERVICE;
@@ -10,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -17,28 +20,26 @@ import java.util.*;
 public class GameManager {
     private static GameManager gameManager;
     private final HashMap<String, GUIPlayerCard> useridGUIMapping;
+    // todo : use database for words
+    String[] words = {"Angel", "Eyeball", "Pizza", "Angry", "Fireworks", "Pumpkin", "Baby", "Flower", "Rainbow",
+            "Beard", "Recycle", "Bible", "Giraffe", "Castle", "Glasses", "Snowflake", "Book", "Heel", "Stairs",
+            "Bucket", "Cream", "Starfish", "bee", "Igloo", "Strawberry", "Butterfly", "Lady", "Sun", "Camera", "Lamp",
+            "Tire", "Cat", "Lion", "Toast", "Church", "Mailbox", "Toothbrush", "Crayon", "Night", "Toothpaste",
+            "Dolphin", "Nose", "Truck", "Egg", "Olympics", "Volleyball", "Tower", "Peanut"};
     private USER_MODE userMode;
     private VBox playerContainer;
     private GameSettings gameSettings;
     private Label guiTimer;
     private String currentPainter;
     private String selectedWord;
-    private Set<String> validGuesses;
-
-    public String getCurrentPainter() {
-        return currentPainter;
-    }
-
-    // todo : use database for words
-    String[] words = { "Angel", "Eyeball", "Pizza", "Angry", "Fireworks", "Pumpkin", "Baby", "Flower", "Rainbow",
-            "Beard","Recycle","Bible","Giraffe","Castle", "Glasses","Snowflake","Book","Heel","Stairs",
-            "Bucket","Cream","Starfish","bee","Igloo","Strawberry", "Butterfly","Lady","Sun","Camera","Lamp",
-            "Tire", "Cat","Lion","Toast","Church","Mailbox","Toothbrush","Crayon","Night","Toothpaste",
-            "Dolphin","Nose","Truck", "Egg","Olympics","Volleyball","Tower","Peanut"};
+    private final Set<String> validGuesses;
+    private final HashMap<String, Integer> pointTable;
 
     private GameManager() {
         useridGUIMapping = new HashMap<>();
         validGuesses = new HashSet<>();
+        pointTable = new HashMap<>();
+        resetPointTable();
     }
 
     public static GameManager getInstance() {
@@ -47,8 +48,8 @@ public class GameManager {
         return gameManager;
     }
 
-    public void setGUITimer(Label timer) {
-        guiTimer = timer;
+    private void resetPointTable() {
+        pointTable.clear();
     }
 
     public USER_MODE getUserMode() {
@@ -93,17 +94,25 @@ public class GameManager {
                 currentPainter = player.getUserid();
                 selectedWord = words[(int) (Math.random() * (words.length))];
                 JsonObject msg = new JsonObject();
-                msg.addProperty("player",AuthUser.deserialize(player));
-                msg.addProperty("word",selectedWord);
+                msg.addProperty("player", AuthUser.deserialize(player));
+                msg.addProperty("word", selectedWord);
                 NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.PLAY_MATCH, msg.toString());
+
+                Thread.sleep(3000);
+
                 ServerTimer timer = new ServerTimer(duration);
                 timer.start();
                 timer.join();
                 //result
-
+                Gson gson = new GsonBuilder().create();
+                String json = gson.toJson(pointTable);
+                NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.ROUND_RESULT, json);
                 // reset
                 validGuesses.clear();
                 NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.CLEAR_CANVAS);
+                resetPointTable();
+
+                Thread.sleep(3000);
             }
         }
 
@@ -126,14 +135,15 @@ public class GameManager {
         return validGuesses.size();
     }
 
-    public void addGuess(String userId) {
+    public void addGuess(String userId, int points) {
         validGuesses.add(userId);
+        pointTable.put(userId, points);
     }
 
     class GUIPlayerCard {
         private final AuthUser authUser;
-        private HBox playerCard;
         Label guiPoints;
+        private HBox playerCard;
 
         GUIPlayerCard(AuthUser authUser) {
             this.authUser = authUser;

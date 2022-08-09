@@ -34,6 +34,7 @@ public class ServerDispatcher extends Thread {
                 case SET_COLOR -> new SetColorDispatcher().dispatch(req,socket);
                 case PLAY_MATCH -> new StartMatchDispatcher().dispatch(req,socket);
                 case UPDATE_TIMER -> new TimerDispatcher().dispatch(req,socket);
+                case ROUND_RESULT -> new ResultDispatcher().dispatch(req,socket);
             }
         }
         catch (IOException e) {

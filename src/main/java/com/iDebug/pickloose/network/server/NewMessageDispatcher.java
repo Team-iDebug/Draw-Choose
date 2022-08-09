@@ -43,7 +43,7 @@ class NewMessageDispatcher extends Dispatcher {
                 res.addProperty("player",userId);
                 res.addProperty("points",points);
                 broadcastRespond(new Response(SERVICE.UPDATE_POINTS,FEEDBACK.SUCCEED,res.toString()));
-                GameManager.getInstance().addGuess(userId);
+                GameManager.getInstance().addGuess(userId,newPoints);
             }
 
             // announcement
