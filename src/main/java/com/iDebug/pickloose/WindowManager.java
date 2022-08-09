@@ -1,6 +1,9 @@
 package com.iDebug.pickloose;
 
+import com.iDebug.pickloose.animation.FadeIn;
 import com.iDebug.pickloose.fxcontroller.FXGameController;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -8,7 +11,9 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -18,6 +23,7 @@ public class WindowManager {
     private static WindowManager windowManager;
     private Stage stage;
     private SCENES scene;
+    private Scene currentScene;
 
     private WindowManager() {
     }
@@ -32,10 +38,12 @@ public class WindowManager {
     private void setScene(String fxmlFile, String cssFile) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(fxmlFile));
         Scene scene = new Scene(fxmlLoader.load());
+        currentScene = scene;
         String css = getClass().getResource(cssFile).toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("PickLoose");
         stage.setScene(scene);
+        new FadeIn(scene.getRoot()).play();
     }
     public void setScene(SCENES scene) {
         this.scene = scene;
@@ -58,30 +66,9 @@ public class WindowManager {
     public SCENES getScene() {
         return scene;
     }
-    public void slideShow(Parent slide) {
-        BorderPane parent = FXGameController.getParent();
-        slide.translateYProperty().set(stage.getHeight());
-        parent.getChildren().add(slide);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(slide.translateYProperty(),0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.seconds(1),kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(event -> {
-            parent.getChildren().remove(slide);
-        });
-        timeline.play();
-    }
 
     public void announcePlayer(String player) {
-//        Parent parent = null;
-//        try {
-//            parent = FXMLLoader.load(getClass().getResource("fxml/game/slider.fxml"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        slideShow(parent);
-        BorderPane parent = FXGameController.getParent();
-//        parent.setStyle();
+//        BoxBlur blur = new BoxBlur(3,3,3);
+//        currentScene.getRoot().setEffect(blur);
     }
 }

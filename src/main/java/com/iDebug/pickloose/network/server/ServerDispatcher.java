@@ -33,7 +33,6 @@ public class ServerDispatcher extends Thread {
                 case SET_TOOL -> new SetToolDispatcher().dispatch(req,socket);
                 case SET_COLOR -> new SetColorDispatcher().dispatch(req,socket);
                 case PLAY_MATCH -> new StartMatchDispatcher().dispatch(req,socket);
-                case STOP_MATCH -> new StopMatchDispatcher().dispatch(req,socket);
                 case UPDATE_TIMER -> new TimerDispatcher().dispatch(req,socket);
             }
         }

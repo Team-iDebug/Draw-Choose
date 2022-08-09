@@ -1,6 +1,7 @@
 package com.iDebug.pickloose.fxcontroller;
 
 import com.iDebug.pickloose.*;
+import com.iDebug.pickloose.animation.Bounce;
 import com.iDebug.pickloose.network.SERVICE;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -208,6 +209,7 @@ public class FXMessageController {
 
         parentBox.getChildren().add(msgBox);
         msgContainer.getChildren().add(parentBox);
+        new Bounce(parentBox).play();
     }
 
     public static void receive(VBox msgContainer, Message message) {
@@ -218,5 +220,6 @@ public class FXMessageController {
 
         parentBox.getChildren().add(msgBox);
         msgContainer.getChildren().add(parentBox);
+        new Bounce(parentBox).play();
     }
 }

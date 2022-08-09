@@ -11,6 +11,6 @@ import java.net.Socket;
 public class ClearCanvasDispatcher extends Dispatcher {
     @Override
     void dispatch(Request request, Socket socket) throws IOException {
-        broadcastExcludeRespond(new Response(SERVICE.CLEAR_CANVAS, FEEDBACK.SUCCEED),socket);
+        broadcastRespond(new Response(SERVICE.CLEAR_CANVAS, FEEDBACK.SUCCEED));
     }
 }

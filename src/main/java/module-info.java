@@ -1,8 +1,10 @@
 module com.iDebug.pickloose {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
     requires org.kordamp.bootstrapfx.core;
     requires org.controlsfx.controls;
+    requires com.jfoenix;
 
     requires com.google.gson;
     requires java.desktop;
@@ -14,4 +16,6 @@ module com.iDebug.pickloose {
     exports com.iDebug.pickloose;
     exports com.iDebug.pickloose.fxcontroller;
     opens com.iDebug.pickloose.fxcontroller to com.google.gson, javafx.fxml;
+    exports com.iDebug.pickloose.animation;
+    opens com.iDebug.pickloose.animation to com.google.gson, javafx.controls, javafx.fxml, org.controlsfx.controls;
 }

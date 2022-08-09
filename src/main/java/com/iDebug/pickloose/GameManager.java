@@ -1,6 +1,7 @@
 package com.iDebug.pickloose;
 
 import com.google.gson.JsonObject;
+import com.iDebug.pickloose.animation.FadeIn;
 import com.iDebug.pickloose.network.SERVICE;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -102,7 +103,7 @@ public class GameManager {
 
                 // reset
                 validGuesses.clear();
-                NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.STOP_MATCH);
+                NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.CLEAR_CANVAS);
             }
         }
 
@@ -141,6 +142,7 @@ public class GameManager {
 
         public void updatePoints(int points) {
             guiPoints.setText(points + " Points");
+            new FadeIn(playerCard).play();
         }
 
         private HBox getGUI() {

@@ -50,9 +50,16 @@ class NewMessageDispatcher extends Dispatcher {
             String text = request.getSender().getUsername() + " guessed the word.";
             Message responseMsg = new Message("SERVER",msg.getTime(),msg.getType(),text, MSG_STATUS.SENT);
             response = new Response(request.getService(), FEEDBACK.SUCCEED,Message.deSerialize(responseMsg));
+            broadcastExcludeRespond(response,socket);
+
+            text = "You guessed the word.";
+            responseMsg = new Message("SERVER",msg.getTime(),msg.getType(),text, MSG_STATUS.SENT);
+            response = new Response(request.getService(), FEEDBACK.SUCCEED,Message.deSerialize(responseMsg));
+            individualRespond(response,socket);
         }
-        else
+        else {
             response = new Response(request.getService(), FEEDBACK.SUCCEED,request.getBody());
-        broadcastExcludeRespond(response, socket);
+            broadcastExcludeRespond(response,socket);
+        }
     }
 }
