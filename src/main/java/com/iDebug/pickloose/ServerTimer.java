@@ -1,5 +1,7 @@
 package com.iDebug.pickloose;
 
+import com.iDebug.pickloose.network.SERVICE;
+
 import java.sql.SQLException;
 
 public class ServerTimer extends Timer {
@@ -33,6 +35,7 @@ public class ServerTimer extends Timer {
             time--;
             TIME = time;
             try {
+                NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.UPDATE_TIMER, String.valueOf(time));
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();

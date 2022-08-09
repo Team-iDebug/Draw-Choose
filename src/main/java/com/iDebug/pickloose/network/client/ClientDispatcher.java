@@ -61,8 +61,8 @@ public class ClientDispatcher extends Dispatcher {
                     case UPDATE_POINTS -> Platform.runLater(() -> {
                         new UpdatePointsDispatcher().dispatch(response);
                     });
-                    case STOP_MATCH -> Platform.runLater(() -> {
-                        new StopMatchDispatcher().dispatch(response);
+                    case UPDATE_TIMER -> Platform.runLater(() -> {
+                        new TimerDispatcher().dispatch(response);
                     });
                 }
             }

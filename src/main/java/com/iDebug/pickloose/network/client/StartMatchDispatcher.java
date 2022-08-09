@@ -2,8 +2,6 @@ package com.iDebug.pickloose.network.client;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.iDebug.pickloose.GameManager;
-import com.iDebug.pickloose.PlayTimer;
 import com.iDebug.pickloose.canvas.DrawManager;
 import com.iDebug.pickloose.fxcontroller.FXGameWordController;
 import com.iDebug.pickloose.fxcontroller.FXMessageController;
@@ -29,8 +27,5 @@ public class StartMatchDispatcher extends Dispatcher {
             DrawManager.getInstance().setMode(DrawManager.MODE.VIEW);
             FXMessageController.setMode(FXMessageController.MODE.TYPE);
         }
-        if(!PlayTimer.isDone())
-            PlayTimer.terminate();
-        new PlayTimer().start();
     }
 }

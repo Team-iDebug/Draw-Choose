@@ -21,5 +21,6 @@ public enum SERVICE {
     ADD_REACTION,
     PLAY_MATCH,
     UPDATE_POINTS,
-    STOP_MATCH
+    STOP_MATCH,
+    UPDATE_TIMER
 }

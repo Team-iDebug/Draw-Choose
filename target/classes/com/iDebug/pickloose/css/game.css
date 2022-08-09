@@ -295,3 +295,10 @@
     -fx-text-fill: -fx-green;
     -fx-alignment: center;
 }
+
+.slider-text {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-yellow;
+    -fx-alignment: center;
+}
