@@ -28,6 +28,7 @@ public class ServerTimer extends Timer {
 
     @Override
     public void run() {
+        System.out.println("started running...");
         while (isRunning()) {
             time--;
             TIME = time;
@@ -37,5 +38,6 @@ public class ServerTimer extends Timer {
                 e.printStackTrace();
             }
         }
+        System.out.println("finished...");
     }
 }

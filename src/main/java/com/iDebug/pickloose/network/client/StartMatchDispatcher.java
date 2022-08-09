@@ -29,6 +29,8 @@ public class StartMatchDispatcher extends Dispatcher {
             DrawManager.getInstance().setMode(DrawManager.MODE.VIEW);
             FXMessageController.setMode(FXMessageController.MODE.TYPE);
         }
+        if(!PlayTimer.isDone())
+            PlayTimer.terminate();
         new PlayTimer().start();
     }
 }

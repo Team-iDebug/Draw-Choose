@@ -8,7 +8,7 @@ public class StopMatchDispatcher extends Dispatcher {
     @Override
     void dispatch(Response response) {
         Platform.runLater(()->{
-            PlayTimer.setFinished();
+            PlayTimer.terminate();
         });
     }
 }
