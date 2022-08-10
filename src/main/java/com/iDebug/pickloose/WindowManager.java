@@ -2,6 +2,8 @@ package com.iDebug.pickloose;
 
 import com.iDebug.pickloose.animation.Bounce;
 import com.iDebug.pickloose.animation.FadeIn;
+import com.iDebug.pickloose.animation.SlideInUp;
+import com.iDebug.pickloose.animation.SlideOutDown;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -154,7 +156,17 @@ public class WindowManager {
         mediaPlayer.setCycleCount(1);
 
         popupStage.show();
+        new SlideInUp(vBox).play();
         mediaPlayer.play();
+
+        TimerTask task1 = new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    new SlideOutDown(vBox).play();
+                });
+            }
+        };
 
         TimerTask task = new TimerTask() {
             @Override
@@ -167,6 +179,7 @@ public class WindowManager {
             }
         };
         Timer timer = new Timer();
+        timer.schedule(task1, 2000);
         timer.schedule(task,3000);
     }
 }
