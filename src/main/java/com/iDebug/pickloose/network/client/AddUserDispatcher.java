@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 class AddUserDispatcher extends Dispatcher {
-    private final static String path = "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\music\\kop.wav";
+    private final static String path = "src\\main\\resources\\com\\iDebug\\pickloose\\music\\kop.wav";
 
     @Override
     void dispatch(Response response) {

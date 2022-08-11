@@ -35,6 +35,7 @@ public class ServerDispatcher extends Thread {
                 case PLAY_MATCH -> new StartMatchDispatcher().dispatch(req,socket);
                 case UPDATE_TIMER -> new TimerDispatcher().dispatch(req,socket);
                 case ROUND_RESULT -> new ResultDispatcher().dispatch(req,socket);
+                case TIME_UP -> new TimeUpDispatcher().dispatch(req,socket);
             }
         }
         catch (IOException e) {

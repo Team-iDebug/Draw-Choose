@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.iDebug.pickloose.animation.FadeIn;
 import com.iDebug.pickloose.network.SERVICE;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -20,6 +21,8 @@ import java.util.*;
 public class GameManager {
     private static GameManager gameManager;
     private final HashMap<String, GUIPlayerCard> useridGUIMapping;
+    private final Set<String> validGuesses;
+    private final HashMap<String, Integer> pointTable;
     // todo : use database for words
     String[] words = {"Angel", "Eyeball", "Pizza", "Angry", "Fireworks", "Pumpkin", "Baby", "Flower", "Rainbow",
             "Beard", "Recycle", "Bible", "Giraffe", "Castle", "Glasses", "Snowflake", "Book", "Heel", "Stairs",
@@ -32,8 +35,6 @@ public class GameManager {
     private Label guiTimer;
     private String currentPainter;
     private String selectedWord;
-    private final Set<String> validGuesses;
-    private final HashMap<String, Integer> pointTable;
 
     private GameManager() {
         useridGUIMapping = new HashMap<>();
@@ -103,16 +104,25 @@ public class GameManager {
                 ServerTimer timer = new ServerTimer(duration);
                 timer.start();
                 timer.join();
-                //result
-                Gson gson = new GsonBuilder().create();
-                String json = gson.toJson(pointTable);
-                NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.ROUND_RESULT, json);
+
+                if (ServerTimer.getTime() <= 0) {
+                    NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.TIME_UP,selectedWord);
+                    Thread.sleep(6000);
+                }
+
+                if (!pointTable.isEmpty()) {
+                    //result
+                    Gson gson = new GsonBuilder().create();
+                    String json = gson.toJson(pointTable);
+                    NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.ROUND_RESULT, json);
+                    Thread.sleep(3000);
+                }
+
                 // reset
                 validGuesses.clear();
                 NetworkManager.getInstance().sendReqAsAuthUser(SERVICE.CLEAR_CANVAS);
                 resetPointTable();
 
-                Thread.sleep(3000);
             }
         }
 

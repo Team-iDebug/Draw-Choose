@@ -11,7 +11,7 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 public class UpdatePointsDispatcher extends Dispatcher {
-    private static String path = "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\music\\correct.wav";
+    private static String path = "src/main/resources/com/iDebug/pickloose/music/correct.wav";
 
     @Override
     void dispatch(Response response) {

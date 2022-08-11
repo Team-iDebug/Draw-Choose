@@ -13,7 +13,7 @@ import java.net.Socket;
 
 public class CanvasSocketDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) {
+    protected void dispatch(Request request, Socket socket) {
         try {
             /*
                 body = {

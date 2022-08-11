@@ -11,7 +11,7 @@ import java.net.Socket;
 
 class GetGameSettingsDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         GameSettings gameSettings = Manager.getInstance().getGameSettings();
         String body = new Gson().toJson(gameSettings);
         individualRespond(new Response(request.getService(), FEEDBACK.SUCCEED, body),socket);

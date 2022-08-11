@@ -12,7 +12,7 @@ import java.net.Socket;
 
 class SetGameSettingsDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         GameSettings gameSettings = new Gson().fromJson(request.getBody(),GameSettings.class);
         Manager.getInstance().setGameSettings(gameSettings);
         broadcastExcludeRespond(new Response(request.getService(), FEEDBACK.SUCCEED,request.getBody()),socket);

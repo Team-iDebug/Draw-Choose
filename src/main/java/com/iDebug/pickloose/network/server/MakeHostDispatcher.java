@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 class MakeHostDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         try {
             if(!Manager.getInstance().hostAssigned()) {
                 Manager.getInstance().setHost(request.getAuthSender());

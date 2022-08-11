@@ -11,7 +11,7 @@ import java.net.Socket;
 
 class SetNotReadyDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         AuthUser sender = request.getAuthSender();
         Manager.getInstance().setNotReady(sender);
         String body = new Gson().toJson(sender) ;

@@ -10,7 +10,7 @@ import java.net.Socket;
 
 public class ClearCanvasDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         broadcastRespond(new Response(SERVICE.CLEAR_CANVAS, FEEDBACK.SUCCEED));
     }
 }

@@ -9,7 +9,7 @@ import java.net.Socket;
 
 class SetToolDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         broadcastExcludeRespond(new Response(request.getService(), FEEDBACK.SUCCEED, request.getBody()),socket);
     }
 }

@@ -67,6 +67,9 @@ public class ClientDispatcher extends Dispatcher {
                     case ROUND_RESULT -> Platform.runLater(() -> {
                         new ResultDispatcher().dispatch(response);
                     });
+                    case TIME_UP -> Platform.runLater(() -> {
+                        new TimeUpDispatcher().dispatch(response);
+                    });
                 }
             }
             catch (Exception e) {

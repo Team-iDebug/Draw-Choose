@@ -12,7 +12,7 @@ import java.sql.SQLException;
 class StartGameDispatcher extends Dispatcher {
 
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         try {
             if(Manager.getInstance().isHost(request.getAuthSender()) && Manager.getInstance().isAllReady()) {
                 broadcastRespond(new Response(SERVICE.START_GAME, FEEDBACK.SUCCEED));

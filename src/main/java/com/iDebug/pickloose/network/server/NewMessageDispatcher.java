@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 class NewMessageDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         Message msg = Message.serialize(request.getBody());
         String userId = request.getAuthSender().getUserid();
         String selectedWord = GameManager.getInstance().getSelectedWord();

@@ -22,5 +22,6 @@ public enum SERVICE {
     PLAY_MATCH,
     UPDATE_POINTS,
     UPDATE_TIMER,
-    ROUND_RESULT
+    ROUND_RESULT,
+    TIME_UP
 }

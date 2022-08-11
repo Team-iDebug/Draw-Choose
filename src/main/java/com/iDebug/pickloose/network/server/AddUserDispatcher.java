@@ -9,7 +9,7 @@ import java.net.Socket;
 
 class AddUserDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         Response response = new Response(request.getService(), FEEDBACK.SUCCEED, request.getBody());
         broadcastRespond(response);
     }

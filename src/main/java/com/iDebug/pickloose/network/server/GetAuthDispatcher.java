@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 class GetAuthDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         AuthUser user = new AuthUser(request.getSender());
         try {
             Manager.getInstance().add(user, socket);

@@ -14,11 +14,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.PopupWindow;
 import javafx.util.Duration;
 import org.controlsfx.control.PopOver;
 
 import javax.xml.stream.Location;
+import java.io.File;
 import java.time.LocalTime;
 
 public class FXMessageController {
@@ -51,6 +54,8 @@ public class FXMessageController {
             "src/main/resources/com/iDebug/pickloose/reacts/poop.png"
     };
 
+    private static String popSound = "src\\main\\resources\\com\\iDebug\\pickloose\\music\\pop-alert.mp3";
+
     public enum MODE {
         TYPE,
         VIEW
@@ -63,6 +68,12 @@ public class FXMessageController {
     }
 
     public static void guiNewMsg(Message message, OBSERVER observer) {
+        if(message.getUserid() != "SERVER") {
+            Media media = new Media(new File(popSound).toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setCycleCount(1);
+            mediaPlayer.play();
+        }
         if(observer == OBSERVER.SENDER)
             send(fxmlMsgContainer,message);
         if(observer == OBSERVER.RECEIVER)

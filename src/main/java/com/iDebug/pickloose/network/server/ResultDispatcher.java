@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ResultDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         Gson gson = new Gson();
         HashMap<String,Object> map = new HashMap<>();
         map = (HashMap<String,Object>) gson.fromJson(request.getBody(), map.getClass());

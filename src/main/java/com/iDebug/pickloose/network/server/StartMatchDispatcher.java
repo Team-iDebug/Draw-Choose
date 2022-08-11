@@ -12,7 +12,7 @@ import java.net.Socket;
 
 public class StartMatchDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         JsonObject msg = new Gson().fromJson(request.getBody(), JsonObject. class);
         AuthUser player = AuthUser.serialize(msg.get("player").getAsString());
         String word = msg.get("word").getAsString();

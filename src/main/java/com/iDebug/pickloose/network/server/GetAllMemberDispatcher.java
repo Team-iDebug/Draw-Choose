@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 class GetAllMemberDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         try {
             var users = Manager.getInstance().getAllUserInfo();
             var roles = Manager.getInstance().getAllUserRole();

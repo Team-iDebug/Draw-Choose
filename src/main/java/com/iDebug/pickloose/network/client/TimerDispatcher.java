@@ -11,7 +11,7 @@ import java.io.File;
 
 
 public class TimerDispatcher extends Dispatcher {
-    private static final String path = "D:\\softwareDev\\iDebug\\src\\main\\resources\\com\\iDebug\\pickloose\\music\\countdown.wav";
+    private static final String path = "src\\main\\resources\\com\\iDebug\\pickloose\\music\\countdown.wav";
 
     @Override
     void dispatch(Response response) {

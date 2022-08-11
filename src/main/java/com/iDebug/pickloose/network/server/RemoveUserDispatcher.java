@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class RemoveUserDispatcher extends Dispatcher {
     @Override
-    void dispatch(Request request, Socket socket) throws IOException {
+    protected void dispatch(Request request, Socket socket) throws IOException {
         AuthUser user = new Gson().fromJson(request.getBody(),AuthUser.class);
         try {
             Manager.getInstance().remove(user);

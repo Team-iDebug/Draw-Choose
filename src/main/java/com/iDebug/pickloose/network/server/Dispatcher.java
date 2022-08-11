@@ -9,7 +9,7 @@ import java.net.Socket;
 import java.util.HashSet;
 
 public abstract class Dispatcher {
-    abstract void dispatch(Request request, Socket socket) throws IOException;
+    protected abstract void dispatch(Request request, Socket socket) throws IOException;
 
     static void individualRespond(Response response, Socket socket) throws IOException {
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
