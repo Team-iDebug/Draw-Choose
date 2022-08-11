@@ -45,21 +45,72 @@ abstract class Brush extends Tool {
         Source : Wikipedia
         bresenham line drawing algorithm
      */
+//    protected static void bresenhamLine(Brush brush, double x0, double y0, double x1, double y1)
+//    {
+//        double dx =  Math.abs(x1-x0), sx = x0<x1 ? 1. : -1.;
+//        double dy = -Math.abs(y1-y0), sy = y0<y1 ? 1. : -1.;
+//        double err = dx+dy, e2; /* error value e_xy */
+//
+//        while( true){
+//            DrawManager.getInstance().getGraphicsContext().drawImage(
+//                    brush.getTexture(),
+//                    x0 - brush.getRadius()/2,
+//                    y0 - brush.getRadius()/2);
+//            if (x0==x1 && y0==y1) break;
+//            e2 = 2.*err;
+//            if (e2 > dy) { err += dy; x0 += sx; } /* e_xy+e_x > 0 */
+//            if (e2 < dx) { err += dx; y0 += sy; } /* e_xy+e_y < 0 */
+//        }
+//    }
+
+//    protected static void bresenhamLine(Brush brush, double x1, double y1, double x2, double y2)
+//    {
+//        Double m_new = 2 * (y2 - y1);
+//        Double slope_error_new = m_new - (x2 - x1);
+//        for (Double x = x1, y = y1; x <= x2; x++)
+//        {
+//            DrawManager.getInstance().getGraphicsContext().drawImage(
+//                    brush.getTexture(),
+//                    x - brush.getRadius()/2,
+//                    y - brush.getRadius()/2);
+//
+//            slope_error_new += m_new;
+//
+//            if (slope_error_new >= 0)
+//            {
+//                y++;
+//                slope_error_new  -= 2 * (x2 - x1);
+//            }
+//        }
+//    }
+
     protected static void bresenhamLine(Brush brush, double x0, double y0, double x1, double y1)
     {
-        double dx =  Math.abs(x1-x0), sx = x0<x1 ? 1. : -1.;
-        double dy = -Math.abs(y1-y0), sy = y0<y1 ? 1. : -1.;
-        double err = dx+dy, e2; /* error value e_xy */
-
-        while( true){
+        double dx = Math.abs(x1 - x0);
+        double sx = x0 < x1 ? 1 : -1;
+        double dy = -Math.abs(y1-y0);
+        double sy = y0 < y1 ? 1 : -1;
+        double error = dx + dy;
+        while(true) {
             DrawManager.getInstance().getGraphicsContext().drawImage(
                     brush.getTexture(),
                     x0 - brush.getRadius()/2,
                     y0 - brush.getRadius()/2);
-            if (x0==x1 && y0==y1) break;
-            e2 = 2.*err;
-            if (e2 > dy) { err += dy; x0 += sx; } /* e_xy+e_x > 0 */
-            if (e2 < dx) { err += dx; y0 += sy; } /* e_xy+e_y < 0 */
+            if(x0 == x1 && y0 == y1)
+                break;
+            double e2 = 2*error;
+            if(e2 >= dy) {
+                if(x0 == x1)
+                    break;
+                error = error + dy;
+                x0 = x0+sx;
+            }
+            if(e2 <= dx) {
+                if(y0 == y1)
+                    break;
+                error = error + dx;
+                y0 = y0 + sy;
+            }
         }
     }
 
